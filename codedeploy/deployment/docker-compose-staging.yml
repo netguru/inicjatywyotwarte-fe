@@ -1,0 +1,16 @@
+version: "3.7"
+services:
+  nginx:
+    image: nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      - STAGE_NGINX_SERVER_NAME
+      - STAGE_NGINX_REWRITE
+      - STAGE_NGINX_PROXY_PASS
+      - STAGE_NGINX_WWW_PROXY_PASS
+      - STAGE_NGINX_LOGIN
+      - STAGE_NGINX_PASSWORD
+    volumes:
+      - ./templates:/etc/nginx/templates

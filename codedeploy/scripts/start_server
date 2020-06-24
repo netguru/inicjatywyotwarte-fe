@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+set -x
+set -u
+
+cd /opt/codedeploy-agent/deployment-root/${DEPLOYMENT_GROUP_ID}/${DEPLOYMENT_ID}/deployment-archive/
+set -a
+source ./parameters
+set +a
+COMPOSE="docker-compose -p app -f deployment/docker-compose-staging.yml"
+${COMPOSE} up -d --force-recreate
+

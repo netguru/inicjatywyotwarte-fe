@@ -1,0 +1,55 @@
+:root {
+  --main-background-color: red;
+  --light-background-color: #fff;
+  --dark-background-color: #7f8fa4;
+  --main-color: #d8eaed;
+  --main-color-category-education: #eddfe8;
+  --main-color-category-neighbour: #c4e3d4;
+  --main-color-category-hospitals: #e1e9f7;
+  --main-color-category-businesses: #eae0d3;
+  --toolbar-main-color: #aacbcf;
+  --toolbar-main-color-category-education: #cfb4c5;
+  --toolbar-main-color-category-neighbour: #79c9a9;
+  --toolbar-main-color-category-hospitals: #b1c2e0;
+  --toolbar-main-color-category-businesses: #d6c0a0;
+  --text-main-color-category-education: #e44bb0;
+  --text-main-color-category-neighbour: #2a915f;
+  --text-main-color-category-hospitals: #3e82fc;
+  --text-main-color-category-businesses: #f1a03c;
+  --font-color-light: #fff;
+  --font-color-normal: #b9c2cd;
+  --font-color-medium: #919191;
+  --font-color-dark: #171717;
+  --blue-active-color: #0091ff;
+  --blue-active-color-dark: #005a9e;
+  --modal-color-light: #62718a;
+  --modal-color-dark: #62718a;
+  --modal-color-very-light: #e6eaee;
+  --resource-tile-layout-color: #dee1e7;
+  --footer-color: #dee1e7;
+  --link-hover-light-color: #b2bbc8;
+  --warning-color: #ff0000;
+  --tag-color: #219653;
+  --resource-tiles-width: 920px;
+  --header-content-width: calc(var(--resource-tiles-width) + 5%);
+  --platform-icon-size: 2.5rem;
+  --min-site-width: 380px;
+  --shadow-small: 0 4px 12px 0 rgba(0, 0, 0, 0.05);
+  --shadow-normal: 3px 5px 10px -5px rgba(148, 148, 148, 1);
+  --shadow-button-hover: 0px 0px 7px rgba(50, 50, 50, 0.2);
+  --input-active-border: 1px solid var(--blue-active-color);
+  --toolbar-height: 4rem;
+  --footer-height: 4rem;
+  --person-tile-width: 130px;
+  --button-transition: all 0.2s;
+  --border-radius-small: 5px;
+  --border-radius-medium: 8px;
+  --border-radius-big: 30px;
+}
+
+@media (max-width: 1000px) {
+  :root {
+    --resource-tiles-width: 93%;
+    --header-content-width: var(--resource-tiles-width);
+  }
+}

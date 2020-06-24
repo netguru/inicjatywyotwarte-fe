@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set -e
+set -x
+set -u
+
+DIR=$(cat /opt/codedeploy-agent/deployment-root/deployment-instructions/${DEPLOYMENT_GROUP_ID}_most_recent_install)
+cd $DIR/deployment-archive/deployment
+COMPOSE="docker-compose -p app -f docker-compose-staging.yml"
+${COMPOSE} down | true
