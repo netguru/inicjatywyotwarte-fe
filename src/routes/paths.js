@@ -1,0 +1,18 @@
+export default {
+  index: '/',
+  neighbourHelp: '/pomoc-sasiedzka',
+  localBusinesses: '/lokalne-firmy',
+  education: '/edukacja',
+  forHospitals: '/dla-szpitali',
+  resources: '/zasoby',
+  resourcesPage: page => `/zasoby/${page}`,
+  resourceItem: id => `/zasob/${id}`,
+  help: '/pomoc',
+  aboutUs: '/o-nas',
+  addResource: '/dodaj-inicjatywe',
+  addResourceSuccess: '/dodaj-inicjatywe/sukces',
+  addResourceFailure: '/dodaj-inicjatywe/blad',
+  termsOfUse: '/regulamin-strony',
+  privacyPolicy: '/polityka-prywatnosci',
+  notFound: '*',
+}

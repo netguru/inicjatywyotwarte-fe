@@ -1,0 +1,298 @@
+version: 2.1
+
+# Env variables:
+# STAGE_AWS_ACCESS_KEY_ID: AWS CodeDeploy user - access key ID [ STAGING_AWS_ACCESS_KEY_ID ]
+# STAGE_AWS_SECRET_ACCESS_KEY: AWS_CodeDeploy user - secret key (decrypted) [ STAGING_AWS_SECRET_ACCESS_KEY ]
+# STAGE_AWS_DEFAULT_REGION: AWS Region [ STAGING_AWS_DEFAULT_REGION ]
+# STAGE_AWS_APPLICATION_NAME: AWS CodeDeploy Application Name [ application-name ]
+# STAGE_AWS_DEPLOYMENT_GROUP: AWS CodeDeploy Deployment Group [ deployment-group ]
+# STAGE_AWS_BUNDLE_BUCKET: Custom bucket S3 [ bundle-bucket ]
+
+# USER_ACCESS_KEY_ID - for prod
+# USER_SECRET_KEY - for prod
+# PRODUCTION_BUCKET - FE bucket name for prod
+# AWS_DEFAULT_REGION - for prod
+
+# For S3 storage:
+# STORAGE_BUCKET: BE bucket name
+# STORAGE_ACCESS_KEY_ID
+# STORAGE_SECRET_ACCESS_KEY
+# STORAGE_REGION
+# PROD_STORAGE_BUCKET: BE bucket name
+# PROD_STORAGE_ACCESS_KEY_ID
+# PROD_STORAGE_SECRET_ACCESS_KEY
+# PROD_STORAGE_REGION
+
+orbs:
+  aws-cli: circleci/aws-cli@0.1.13
+  aws-code-deploy: circleci/aws-code-deploy@0.0.9
+
+executors:
+  node:
+    working_directory: ~/repo
+    docker:
+      - image: circleci/node:12.9.0-stretch
+        environment:
+          SHARP_DIST_BASE_URL: https://s3-us-west-2.amazonaws.com/sharp-distro/
+      - image: circleci/postgres:11.5-alpine
+        environment:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+
+commands:
+  upload_to_s3:
+    parameters:
+      src:
+        type: string
+      dest:
+        type: env_var_name
+      delete:
+        type: boolean
+        default: true
+      add_www:
+        type: boolean
+        default: false
+      acl_type:
+        type: string
+      aws_access_key_id:
+        type: env_var_name
+      aws_secret_access_key:
+        type: env_var_name
+      aws_region:
+        type: env_var_name
+        default: AWS_DEFAULT_REGION
+    steps:
+      - aws-cli/install
+      - aws-cli/configure:
+          profile-name: default
+          aws-access-key-id: << parameters.aws_access_key_id >>
+          aws-secret-access-key: << parameters.aws_secret_access_key >>
+          aws-region: << parameters.aws_region >>
+      - run:
+          name: Deploy to S3
+          command: 'aws s3 sync --acl << parameters.acl_type >> << parameters.src >>/ s3://${<< parameters.dest >>}<<# parameters.add_www >>/www<</ parameters.add_www >> <<# parameters.delete >> --delete<</ parameters.delete >>'
+      - run:
+          name: Set html cache-control headers
+          command: |
+            aws s3 cp --acl << parameters.acl_type >> s3://${<< parameters.dest >>}/ s3://${<< parameters.dest >>}/ \
+              --recursive \
+              --metadata-directive REPLACE \
+              --exclude '*' \
+              --include '*.html' \
+              --cache-control private,no-cache,no-store,must-revalidate
+      - run:
+          name: Set css/js cache-control headers
+          command: |
+            aws s3 cp --acl << parameters.acl_type >> s3://${<< parameters.dest >>}/ s3://${<< parameters.dest >>}/ \
+              --recursive \
+              --metadata-directive REPLACE \
+              --exclude '*' \
+              --include '*.css' --include '*.js' --include '*.js.map' --include '*.js.LICENSE' \
+              --cache-control public,max-age=31536000,immutable
+      - run:
+          name: Set font/image cache-control headers
+          command: |
+            aws s3 cp --acl << parameters.acl_type >> s3://${<< parameters.dest >>}/ s3://${<< parameters.dest >>}/ \
+              --recursive \
+              --metadata-directive REPLACE \
+              --exclude '*' \
+              --include '*.ttf' --include '*.woff' --include '*.woff2' --include '*.svg' --include '*.png' --include '*.jpg' --include '*.webp' --include '*.ico' \
+              --cache-control public,max-age=2592000
+      - run:
+          name: Set xml/json cache-control headers
+          command: |
+            aws s3 cp --acl << parameters.acl_type >> s3://${<< parameters.dest >>}/ s3://${<< parameters.dest >>}/ \
+              --recursive \
+              --metadata-directive REPLACE \
+              --exclude '*' \
+              --include '*.xml' \
+              --include '*.json' \
+              --cache-control public,max-age=0
+
+jobs:
+  checkout_code:
+    executor: node
+    steps:
+      - checkout
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - .
+
+  install_packages:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - restore_cache:
+          keys:
+            - repo-yarn-{{ checksum "yarn.lock" }}
+            - repo-yarn-
+      - run: sudo apt-get --only-upgrade install libvips
+      - run: yarn
+      - save_cache:
+          paths:
+            - ~/.yarn-cache
+          key: repo-yarn-{{ checksum "yarn.lock" }}
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - node_modules
+            - ./**/node_modules
+            - ./packages/**/node_modules
+  run_linter:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: yarn lint
+  test_frontend:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: yarn test
+
+  build_staging_frontend:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: REACT_APP_API_URL=$API_URL_STAGING REACT_APP_ACCESS_KEY_ID=$STORAGE_ACCESS_KEY_ID REACT_APP_SECRET_ACCESS_KEY=$STORAGE_SECRET_ACCESS_KEY REACT_APP_REGION=$STORAGE_REGION REACT_APP_BUCKET=$STORAGE_BUCKET APP_NAME=$APP_NAME yarn build
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - ./build
+
+  build_production_frontend:
+    executor: node
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - run: REACT_APP_API_URL=$API_URL_PRODUCTION REACT_APP_ACCESS_KEY_ID=$PROD_STORAGE_ACCESS_KEY_ID REACT_APP_SECRET_ACCESS_KEY=$PROD_STORAGE_SECRET_ACCESS_KEY REACT_APP_REGION=$PROD_STORAGE_REGION REACT_APP_BUCKET=$PROD_STORAGE_BUCKET yarn build
+      - persist_to_workspace:
+          root: ~/repo
+          paths:
+            - ./build
+
+  upload_production_frontend:
+    executor: aws-cli/default
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - upload_to_s3:
+          src: ./build
+          dest: PRODUCTION_BUCKET
+          delete: true
+          acl_type: private
+          aws_access_key_id: USER_ACCESS_KEY_ID
+          aws_secret_access_key: USER_SECRET_KEY
+
+  upload_new_staging_frontend:
+    executor: aws-cli/default
+    working_directory: ~/repo
+    steps:
+      - attach_workspace:
+          at: ~/repo
+      - upload_to_s3:
+          src: ./build
+          dest: STAGE_AWS_BUNDLE_BUCKET
+          delete: true
+          add_www: true
+          acl_type: public-read
+          aws_access_key_id: STAGE_AWS_ACCESS_KEY_ID
+          aws_secret_access_key: STAGE_AWS_SECRET_ACCESS_KEY
+
+  push_and_deploy_bundle_staging:
+    executor: aws-cli/default
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          command: |
+            if [ ! -f ./codedeploy/parameters ]
+            then
+              touch ./codedeploy/parameters
+            fi
+            echo STAGE_NGINX_SERVER_NAME=${STAGE_NGINX_SERVER_NAME} >> ./codedeploy/parameters
+            echo STAGE_NGINX_REWRITE=${STAGE_NGINX_REWRITE} >> ./codedeploy/parameters
+            echo STAGE_NGINX_PROXY_PASS=${STAGE_NGINX_PROXY_PASS} >> ./codedeploy/parameters
+            echo STAGE_NGINX_WWW_PROXY_PASS=${STAGE_NGINX_WWW_PROXY_PASS} >> ./codedeploy/parameters
+            echo STAGE_NGINX_LOGIN=${STAGE_NGINX_LOGIN} >> ./codedeploy/parameters
+            echo STAGE_NGINX_PASSWORD=${STAGE_NGINX_PASSWORD} >> ./codedeploy/parameters
+      - attach_workspace:
+          at: ~/repo
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-access-key-id: STAGE_AWS_ACCESS_KEY_ID
+          aws-secret-access-key: STAGE_AWS_SECRET_ACCESS_KEY
+          aws-region: STAGE_AWS_DEFAULT_REGION
+      - aws-code-deploy/push-bundle:
+          application-name: ${STAGE_AWS_APPLICATION_NAME}
+          bundle-bucket: ${STAGE_AWS_BUNDLE_BUCKET}
+          bundle-key: codedeploy/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BUILD_NUM}
+          bundle-source: codedeploy
+      - aws-code-deploy/deploy-bundle:
+          application-name: ${STAGE_AWS_APPLICATION_NAME}
+          deployment-group: ${STAGE_AWS_DEPLOYMENT_GROUP}
+          bundle-bucket: ${STAGE_AWS_BUNDLE_BUCKET}
+          bundle-key: codedeploy/${CIRCLE_PROJECT_REPONAME}-${CIRCLE_BUILD_NUM}
+
+workflows:
+  version: 2.1
+  test_build_deploy:
+    jobs:
+      - checkout_code
+      - install_packages:
+          requires:
+            - checkout_code
+
+      - test_frontend:
+          requires:
+            - install_packages
+
+      - run_linter:
+          requires:
+            - install_packages
+
+      - build_staging_frontend:
+          requires:
+            - install_packages
+            - test_frontend
+          filters:
+            branches:
+              only:
+                - master
+
+      - build_production_frontend:
+          requires:
+            - install_packages
+            - test_frontend
+          filters:
+            branches:
+              only:
+                - production
+
+      - upload_new_staging_frontend:
+          filters:
+            branches:
+              only:
+                - master
+          requires:
+            - build_staging_frontend
+
+      - upload_production_frontend:
+          filters:
+            branches:
+              only:
+                - production
+          requires:
+            - build_production_frontend
+
+      - push_and_deploy_bundle_staging:
+          filters:
+            branches:
+              only: master
+          requires:
+            - upload_new_staging_frontend
