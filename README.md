@@ -20,6 +20,23 @@ This project uses React and builds with yarn.
 
 `yarn install` and `yarn start`
 
+We're fetching JSONs from AWS s3 bucket. In development environment we're using `localstack` that emulates AWS services.
+
+You need to have docker-compose installed, then run:
+
+`docker-compose -f localstack-docker-compose.yml up`
+
+or
+
+`docker-compose -f localstack-docker-compose.yml up -d` to run in background.
+
+If service is running, application should properly fetch JSONs from faked s3.
+
+You can use localstack with AWS CLI or SDK. You just need to add `--endpoint-url=http://localhost:4572` option.
+
+Example:
+`aws --endpoint-url=http://localhost:4572  s3 ls s3://local-bucket/` 
+
 ## Code of conduct
 - [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md)
 
