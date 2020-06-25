@@ -32,6 +32,7 @@ const theme = createMuiTheme({
   linkHoverLightColor: '#b2bbc8',
   warningColor: '#ff0000',
   tagColor: '#219653',
+  tagBackgroundColor: '#c4e3d4',
   resourceTilesWidth: '920px',
   mobileResourceTilesWidth: '93%',
   headerContentWidth: 'calc(920px + 5%)',
