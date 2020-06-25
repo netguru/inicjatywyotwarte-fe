@@ -7,7 +7,7 @@ const getBasicTagColor = theme => theme.tagColor
 
 const getHoverBorderColor = theme => hexToRgba(getBasicTagColor(theme), '0.2')
 
-const getBackgroundColor = theme => hexToRgba(getBasicTagColor(theme), '0.4')
+const getBackgroundColor = theme => hexToRgba(theme.tagBackgroundColor)
 
 const TagItem = styled.div`
   height: 2rem;
