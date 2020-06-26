@@ -9,12 +9,10 @@ import paths from 'routes/paths'
 import titles from 'routes/titles'
 
 import Page from 'components/Page/Page'
-import CookieBanner from 'components/CookieBanner/CookieBanner'
 
 export default () => (
   <>
   <ScrollToTop />
-  <CookieBanner />
   <Page>
     <Switch>
       <RouteWithTitle path={paths.index} exact component={config.index} title={titles.index} />
