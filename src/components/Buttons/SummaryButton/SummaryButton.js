@@ -12,23 +12,30 @@ const ButtonStyles = `
   font-weight: 500;
   font-size: 0.8rem;
   margin: 2rem auto;
-  border: 2px solid ${props => props.theme.modalColorVeryLight};
   width: 10rem;
+  cursor: pointer;
+`
+
+const StyledLink = styled(Link)`
+  ${ButtonStyles}
+  border: 2px solid ${props => props.theme.modalColorVeryLight};
   background: ${props => props.theme.lightBackgroundColor};
   transition: ${props => props.theme.buttonTransition};
-  cursor: pointer;
-
+  
   &:hover {
     box-shadow: ${props => props.theme.shadowButtonHover};
   }
 `
 
-const StyledLink = styled(Link)`
-  ${ButtonStyles}
-`
-
 const StyledButton = styled.div`
   ${ButtonStyles}
+  border: 2px solid ${props => props.theme.modalColorVeryLight};
+  background: ${props => props.theme.lightBackgroundColor};
+  transition: ${props => props.theme.buttonTransition};
+  
+  &:hover {
+    box-shadow: ${props => props.theme.shadowButtonHover};
+  }
 `
 
 const SummaryButton = ({ to = '', onClick, children, className }) => {
