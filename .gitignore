@@ -3,3 +3,4 @@
 .env
 .env.development
 yarn-error.log
+.localstack/
