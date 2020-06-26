@@ -30,6 +30,12 @@ or
 
 `docker-compose -f localstack-docker-compose.yml up -d` to run in background.
 
+Then you need to create bucket `local-bucket`
+
+`aws --endpoint-url=http://localhost:4572 s3 mb s3://local-bucket`
+
+`aws --endpoint-url=http://localhost:4572 s3api put-bucket-acl --bucket local-bucket --acl public-read`
+
 If service is running, application should properly fetch JSONs from faked s3.
 
 You can use localstack with AWS CLI or SDK. You just need to add `--endpoint-url=http://localhost:4572` option.
