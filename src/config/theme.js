@@ -17,6 +17,7 @@ const theme = createMuiTheme({
   textMainColorCategoryNeighbour: '#2a915f',
   textMainColorCategoryHospitals: '#3e82fc',
   textMainColorCategoryBusinesses: '#f1a03c',
+  textMainColorCategoryEducation: '#e44bb0',
   fontColorLight: '#fff',
   fontColorNormal: '#b9c2cd',
   fontColorMedium: '#919191',
