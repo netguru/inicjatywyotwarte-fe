@@ -9,15 +9,10 @@ import {
   List,
   OrderedList,
   ListItem,
-  linkStyles,
   ExternalLink
 } from 'pages/sharedStyles'
 
-const ContactLink = styled.a.attrs({
-  href: 'mailto: dpo@netguru.com'
-})`
-  ${linkStyles}
-`
+const ContactLink = styled(ExternalLink).attrs({ href: 'mailto: dpo@netguru.com' })``
 
 const PrivacyPolicyPage = () => {
   return (
