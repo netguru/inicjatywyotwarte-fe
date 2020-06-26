@@ -14,8 +14,8 @@ import CookieBanner from 'components/CookieBanner/CookieBanner'
 export default () => (
   <>
   <ScrollToTop />
-  <CookieBanner />
   <Page>
+    <CookieBanner />
     <Switch>
       <RouteWithTitle path={paths.index} exact component={config.index} title={titles.index} />
 

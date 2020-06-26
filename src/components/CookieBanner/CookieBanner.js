@@ -12,18 +12,18 @@ const Banner = styled.div`
   max-width: 90%;
   padding: 25px;
   font-size: 0.9rem;
-  background: var(--main-color-category-neighbour);
-  color: var(--font-color-medium);
+  background: ${props => props.theme.mainColorCategoryNeighbour};
+  color: ${props => props.theme.fontColorMedium};
   z-index: 10;
   opacity: 0.97;
   text-align: justify;
   line-height: 1.4rem;
-  border-radius: var(--border-radius-medium);
+  border-radius: ${props => props.theme.borderRadiusMedium};
 `
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: var(--blue-active-color);
+  color: ${props => props.theme.blueActiveColor};
 `
 
 const StyledSummaryButton = styled(SummaryButton)`
