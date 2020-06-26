@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 export const MainContainer = styled.div`
   width: ${props => props.theme.resourceTilesWidth};
@@ -60,13 +61,9 @@ export const Description = styled.p`
   margin: 0.7rem 0;`}
 `
 
-export const linkStyles = `
+export const ExternalLink = styled(Link)`
   text-decoration: none;
   color: ${props => props.theme.blueActiveColor};
-`
-
-export const ExternalLink = styled.a`
-  ${linkStyles}
 `
 
 const listStyles = `

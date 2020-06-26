@@ -10,15 +10,10 @@ import {
   DefinitionsContainer,
   AdvancedList,
   ListItem,
-  ExternalLink,
-  linkStyles
+  ExternalLink
 } from 'pages/sharedStyles'
 
-const ContactLink = styled.a.attrs({
-  href: `mailto: ${mainContactEmail}`
-})`
-  ${linkStyles}
-`
+const ContactLink = styled(ExternalLink).attrs({ href: `mailto: ${mainContactEmail}` })``
 
 const TermsOfUsePage = () => {
   return (
