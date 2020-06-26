@@ -64,7 +64,7 @@ const GoBackButton = styled.button.attrs({
   background: transparent;
   border: none;
   font-size: 0.9rem;
-  width: fit-content;
+  width: -moz-fit-content;
   display: flex;
   align-items: center;
   cursor: pointer;
