@@ -10,6 +10,7 @@ import HospitalHeaderAnimation from './HospitalHeaderAnimation'
 import styled from 'styled-components'
 import { useTheme } from '@material-ui/core/styles';
 import AccessibilityContainer from '../AccessibilityContainer/AccessibilityContainer'
+import CookieBanner from 'components/CookieBanner/CookieBanner'
 
 const IconContainer = styled.div`
   display: flex;
@@ -182,6 +183,7 @@ const Header = ({ pathname, toggleContrast, toggleIncreaseFontSize }) => {
 
   return (
     <HeaderWrapper colorName={colorName}>
+      <CookieBanner/>
       <HeaderContent>
         <HeaderTop>
           <StyledLink to='/'>
