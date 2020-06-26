@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { mainContactEmail } from 'constants/constants'
 import { ReactComponent as Illustration } from 'assets/about_us_illustration.svg'
 import styled from 'styled-components'
@@ -35,7 +34,7 @@ import {
   TextContent,
   Header,
   Description,
-  linkStyles
+  ExternalLink
 } from 'pages/sharedStyles'
 
 const IllustrationContainer = styled.div`
@@ -74,15 +73,7 @@ const StyledHr = styled.hr`
   border: 1px solid ${props => props.theme.modalColorVeryLight};
 `
 
-const StyledLink = styled(Link)`
-  ${linkStyles}
-`
-
-const ContactLink = styled.a.attrs({
-  href: `mailto: ${mainContactEmail}`
-})`
-  ${linkStyles}
-`
+const ContactLink = styled(ExternalLink).attrs({href: `mailto: ${mainContactEmail}`})``
 
 const AboutUsPage = () => {
   return (
@@ -293,7 +284,7 @@ const AboutUsPage = () => {
           <Header>Szukasz więcej?</Header>
           <Description small>
             Zobacz także{' '}
-            <StyledLink to='/pomoc'>“Najczęściej zadawane pytania"</StyledLink>
+            <ExternalLink to='/pomoc'>“Najczęściej zadawane pytania"</ExternalLink>
           </Description>
         </TextContent>
       </Container>
