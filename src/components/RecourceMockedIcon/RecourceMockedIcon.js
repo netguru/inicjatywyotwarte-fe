@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useTheme } from '@material-ui/core/styles';
 
 const Icon = styled.div`
   height: ${props => props.size}px;
@@ -14,30 +15,31 @@ const Icon = styled.div`
   text-align: center;
   font-size: 1.2rem;
 
-  ${props => `background: var(${props.bgColorName});`}
-  ${props => `color: var(${props.textColorName});`}
+  ${props => `background: ${props.bgColorName};`}
+  ${props => `color: ${props.textColorName};`}
 `
 
 const maxNumberOfCharacters = 30
 
 const RecourceMockedIcon = ({ title, category, size }) => {
+  const theme = useTheme();
   let bgColorName = null
   let textColorName = null
   if (category === 'neighbourly_help') {
-    bgColorName = '--main-color-category-neighbour'
-    textColorName = '--text-main-color-category-neighbour'
+    bgColorName = theme.mainColorCategoryNeighbour
+    textColorName = theme.textMainColorCategoryNeighbour
   } else if (category === 'local_firms') {
-    bgColorName = '--main-color-category-businesses'
-    textColorName = '--text-main-color-category-businesses'
+    bgColorName = theme.mainColorCategoryBusinesses
+    textColorName = theme.textMainColorCategoryBusinesses
   } else if (category === 'education') {
-    bgColorName = '--main-color-category-education'
-    textColorName = '--text-main-color-category-education'
+    bgColorName = theme.mainColorCategoryEducation
+    textColorName = theme.textMainColorCategoryEducation
   } else if (category === 'for_hospitals') {
-    bgColorName = '--main-color-category-hospitals'
-    textColorName = '--text-main-color-category-hospitals'
+    bgColorName = theme.mainColorCategoryHospitals
+    textColorName = theme.textMainColorCategoryHospitals
   } else {
-    bgColorName = '--main-color'
-    textColorName = '--toolbar-main-color'
+    bgColorName = theme.mainColor
+    textColorName = theme.toolbarMainColor
   }
 
   return (
