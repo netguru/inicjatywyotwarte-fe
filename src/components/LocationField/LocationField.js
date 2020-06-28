@@ -5,7 +5,6 @@ import PlacesAutocomplete, {
 import styled from 'styled-components'
 
 import Label from 'components/FormPrimitives/FieldLabel/FieldLabel'
-import Loader from 'components/Loader/Loader'
 
 const PlacesAutocompleteWrapper = styled.div`
   .location-autocomplete-input {
@@ -41,6 +40,10 @@ const PlacesAutocompleteWrapper = styled.div`
   }
 
   .location-autocomplete-dropdown {
+    position: absolute;
+    width: 100%;
+    top: 4.8rem;
+    box-sizing: border-box;
     height: auto;
     background: ${props => props.theme.lightBackgroundColor};
     border: 1px solid ${props => props.theme.addInitiativeButtonBorderColor};
@@ -72,6 +75,15 @@ const InputBox = styled.div`
   margin-bottom: 1.5rem;
   width: 100%;
   position: relative;
+`
+
+const LocationLoader = styled.div`
+  width: 100%;
+  font-size: 1rem;
+  margin: .5rem 0;
+  text-align: center;
+  position: absolute;
+  top: 4.8rem;
 `
 
 export default function LocationField({
@@ -148,7 +160,7 @@ export default function LocationField({
               })}
             />
             <div className={suggestions.length > 1 ? 'location-autocomplete-dropdown' : ''}>
-              {loading && <Loader />}
+              {loading && <LocationLoader>Ładowanie ...</LocationLoader>}
               {suggestions.map(suggestion => {
                 const className = suggestion.active
                   ? 'location-autocomplete-suggestion-item--active'
