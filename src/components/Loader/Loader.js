@@ -1,7 +1,11 @@
 import React from 'react'
+import styled from 'styled-components'
 
-import './Loader.css'
+const StyledLoader = styled.div`
+  text-align: center;
+  margin: 4em;
+`
 
 export default function Loader () {
-  return <div className='loader'>Ładowanie...</div>
+  return <StyledLoader>Ładowanie...</ StyledLoader>
 }
