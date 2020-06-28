@@ -15,6 +15,7 @@ import { useLunrSearch } from 'hooks/useLunrSearch'
 import Loader from 'components/Loader/Loader'
 import Error from 'components/Error/Error'
 import NoInitiatives from 'components/NoInitiatives/NoInitiatives'
+import NoResults from 'components/NoResults/NoResults'
 import ResourceTile from 'components/ResourceTile/ResourceTile'
 import SelectFieldDownshift from 'components/FormPrimitives/SelectFieldDownshift/SelectFieldDownshift'
 import TagsList from 'components/TagsList/TagsList'
@@ -564,7 +565,7 @@ export default function Initiatives ({
           />
         )}
         {!showInitiatives ? (
-          <p>Brak rezultatów wyszukiwania...</p>
+          <NoResults />
         ) : (
           renderInitiatives
         )}
