@@ -304,7 +304,7 @@ const OneResourcePage = ({
     facebook_url: fbUrl,
     tag_list: tags,
     how_to_help: howToHelp,
-    // upvotes_count: upvotesCount
+    upvotes_count: upvotesCount
   } = initiative.attributes
 
   const platformTiles = []
@@ -374,7 +374,7 @@ const OneResourcePage = ({
         </HeaderDescription>
         <VoteButtonContainer>
           <VoteButton
-            votesCount={votesCount}
+            votesCount={upvotesCount}
             handleVote={vote}
             alreadyUpvoted={alreadyUpvoted}
           />
