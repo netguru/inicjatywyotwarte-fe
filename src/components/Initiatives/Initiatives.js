@@ -100,6 +100,7 @@ const SearchContainer = styled.div`
 `
 
 const SearchBox = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   height: 40px;
@@ -160,6 +161,19 @@ const SearchInput = styled.input.attrs({
   &::placeholder {
     color: ${props => props.theme.modalColorLight};
   }
+`
+
+const SearchClearButton = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 0;
+  font-size: 1.4rem;
+  background: transparent;
+  width: 30px;
+  height: 30px;
+  color: ${props => props.theme.addInitiativeButtonBorderColor};
 `
 
 const SearchButton = styled.button`
@@ -553,6 +567,16 @@ export default function Initiatives ({
                   }
                 }}
               />
+              {pendingSearchText && (
+                <SearchClearButton
+                  onClick={() => {
+                    pendingSearchText = ''
+                    handleNewSearch()
+                  }}
+                >
+                  &#215;
+                </SearchClearButton>
+              )}
             </SearchBox>
           </SearchContainer>
         </Header>
