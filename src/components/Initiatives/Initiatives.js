@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
-import { map, sortBy, filter } from 'lodash'
+import { map, sortBy, filter, orderBy } from 'lodash'
 // import * as JsSearch from 'js-search'
 
 import Pagination from '@material-ui/lab/Pagination'
@@ -537,7 +537,7 @@ export default function Initiatives ({
                 selectedItem={selectedItem}
                 handleSelectedItemChange={handleSelectedItemChange}
                 placeholder='Lokalizacja'
-                items={locations}
+                items={orderBy(locations, 'label', ['asc'])}
               />
             )}
             <SearchBox>
