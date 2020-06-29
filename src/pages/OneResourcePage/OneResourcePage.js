@@ -374,7 +374,7 @@ const OneResourcePage = ({
         </HeaderDescription>
         <VoteButtonContainer>
           <VoteButton
-            votesCount={upvotesCount}
+            votesCount={votesCount ? votesCount : upvotesCount}
             handleVote={vote}
             alreadyUpvoted={alreadyUpvoted}
           />
