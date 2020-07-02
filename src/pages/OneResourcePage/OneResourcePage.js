@@ -35,6 +35,7 @@ const MainContainer = styled.div`
   
   @media (max-width: 1000px) {
     width: ${props => props.theme.mobileResourceTilesWidth};
+    padding: 4rem 1rem 1.5rem 1.5rem;
   }
 `
 
