@@ -221,8 +221,8 @@ function ResourceTile ({
   fbUrl,
   votes
 }) {
-  const [votesCount, setVotesCount] = useState(votes)
   const [alreadyUpvoted, setAlreadyUpvoted] = useState(isAlreadyUpvoted(id))
+  const [votesCount, setVotesCount] = useState(alreadyUpvoted ? votes + 1 : votes)
 
   const vote = () => {
     const value = alreadyUpvoted ? 0 : 1
