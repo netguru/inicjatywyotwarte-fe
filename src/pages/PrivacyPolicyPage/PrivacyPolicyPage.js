@@ -9,10 +9,9 @@ import {
   List,
   OrderedList,
   ListItem,
-  ExternalLink
+  ExternalLink,
+  EmailLink
 } from 'pages/sharedStyles'
-
-const ContactLink = styled(ExternalLink).attrs({ href: 'mailto: dpo@netguru.com' })``
 
 const PrivacyPolicyPage = () => {
   return (
@@ -71,7 +70,7 @@ const PrivacyPolicyPage = () => {
             <ListItem small>
               Inspektorem Ochrony Danych Osobowych jest Katarzyna Muszyńska, z
               którą możesz się kontaktować pod adresem:{' '}
-              <ContactLink>dpo@netguru.com</ContactLink>
+              <EmailLink href={ 'mailto: dpo@netguru.com' }>dpo@netguru.com</EmailLink>
             </ListItem>
             <ListItem small>
               Administrator z należytą starannością wybiera i stosuje
@@ -272,7 +271,7 @@ const PrivacyPolicyPage = () => {
             <ListItem small>
               Możesz skorzystać z praw określonych w powyższej sekcji, wysyłając
               odpowiednie żądanie na adres e-mail:{' '}
-              <ContactLink>dpo@netguru.com</ContactLink>.
+              <EmailLink href={ 'mailto: dpo@netguru.com' }>dpo@netguru.com</EmailLink>.
             </ListItem>
             <ListItem small>
               Użytkownik ma prawo odwołać się do organu nadzorczego, jeśli uzna,
@@ -284,7 +283,7 @@ const PrivacyPolicyPage = () => {
               zaktualizuj preferencje wiadomości e-mail w drugim kroku,
               odznaczając typy wiadomości, których nie chcesz otrzymywać, i
               zaakceptuj ustawienia . Możesz również skontaktować się z nami za
-              pośrednictwem maila: <ContactLink>dpo@netguru.com</ContactLink>.
+              pośrednictwem maila: <EmailLink href={ 'mailto: dpo@netguru.com' }>dpo@netguru.com</EmailLink>.
             </ListItem>
           </OrderedList>
           <Header>Artykuł 7. Ciasteczka</Header>
