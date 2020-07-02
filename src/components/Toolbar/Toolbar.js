@@ -71,10 +71,8 @@ const Item = ({ href, children, color, main, exact }) => {
       borderColor: color
     }
 
-    console.log(href, main);
-
   return (
-    <StyledNavLink color={color} main={main} activeStyle={activeStyle} exact={exact} to={href}>
+    <StyledNavLink color={color} main activeStyle={activeStyle} exact={exact} to={href}>
       {children}
     </StyledNavLink>
   )
@@ -103,7 +101,7 @@ const Toolbar = () => {
         <Item
           href={'/'}
           color={color}
-          main={true}
+          main
           exact
         >
           Wszystkie
