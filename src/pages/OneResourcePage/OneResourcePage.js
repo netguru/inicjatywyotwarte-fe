@@ -92,6 +92,7 @@ const ResourceIcon = styled.div`
   height: 150px;
   width: 150px;
   border-radius: ${props => props.theme.borderRadiusMedium};
+  border: 1px solid rgba(23, 23, 23, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
