@@ -43,7 +43,7 @@ const StyledNoResultsIllustration = styled(NoResultsIllustration)`
   padding: 2rem 0;
 `
 
-export default function NoResults () {
+export default function NoResults ({ clearActiveTags }) {
   return (
     <NoResultsContainer>
       <StyledNoResultsIllustration />
@@ -51,7 +51,7 @@ export default function NoResults () {
         Nie udało nam się znaleźć pasujących inicjatyw.
       </Paragraph>
       <Span>Zobacz wszystkie inicjatywy</ Span>
-      <HomeButton to={'/'}>Przejdź do strony głównej</ HomeButton>
+      <HomeButton to={'/'} onClick={clearActiveTags}>Przejdź do strony głównej</ HomeButton>
     </NoResultsContainer>
   )
 }
