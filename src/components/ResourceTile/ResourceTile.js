@@ -29,6 +29,7 @@ const ResourceIcon = styled(Link)`
   max-width: 130px;
   margin-right: 30px;
   border-radius: ${props => props.theme.borderRadiusMedium};
+  border: 1px solid rgba(23, 23, 23, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
