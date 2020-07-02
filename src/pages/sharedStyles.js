@@ -66,6 +66,13 @@ export const ExternalLink = styled(Link)`
   color: ${props => props.theme.blueActiveColor};
 `
 
+export const EmailLink = styled.a`
+  text-decoration: none;
+  color: ${props => props.theme.blueActiveColor};
+`
+
+export const PageLink = styled(ExternalLink)``
+
 const listStyles = `
   font-weight: 300;
   font-size: 1.2rem;

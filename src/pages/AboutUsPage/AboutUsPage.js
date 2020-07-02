@@ -34,7 +34,8 @@ import {
   TextContent,
   Header,
   Description,
-  ExternalLink
+  PageLink,
+  EmailLink
 } from 'pages/sharedStyles'
 
 const IllustrationContainer = styled.div`
@@ -72,8 +73,6 @@ const StyledHr = styled.hr`
   width: 100%;
   border: 1px solid ${props => props.theme.modalColorVeryLight};
 `
-
-const ContactLink = styled(ExternalLink).attrs({href: `mailto: ${mainContactEmail}`})``
 
 const AboutUsPage = () => {
   return (
@@ -269,7 +268,7 @@ const AboutUsPage = () => {
           <Header>Kontakt</Header>
           <Description small>
             Jeśli chcesz do nas dołączyć, napisz na adres{' '}
-            <ContactLink>{mainContactEmail}</ContactLink> i połączmy siły! Razem
+            <EmailLink href={ `mailto: ${mainContactEmail}` }>{mainContactEmail}</EmailLink> i połączmy siły! Razem
             możemy więcej!
           </Description>
         </TextContent>
@@ -284,7 +283,7 @@ const AboutUsPage = () => {
           <Header>Szukasz więcej?</Header>
           <Description small>
             Zobacz także{' '}
-            <ExternalLink to='/pomoc'>“Najczęściej zadawane pytania"</ExternalLink>
+            <PageLink to='/pomoc'>“Najczęściej zadawane pytania"</PageLink>
           </Description>
         </TextContent>
       </Container>
