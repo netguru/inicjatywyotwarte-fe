@@ -72,7 +72,7 @@ const Item = ({ href, children, color, main, exact }) => {
     }
 
   return (
-    <StyledNavLink color={color} main activeStyle={activeStyle} exact={exact} to={href}>
+    <StyledNavLink color={color} main={main} activeStyle={activeStyle} exact={exact} to={href}>
       {children}
     </StyledNavLink>
   )
