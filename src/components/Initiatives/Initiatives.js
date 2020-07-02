@@ -271,6 +271,7 @@ export default function Initiatives ({
   let pendingSearchText = searchPhrase
 
   const searchText = getSearchPhrase(history)
+  const clearActiveTags = () => setActiveSearchTags([])
 
   useEffect(() => {
     const fetchInitiatives = async () => {
@@ -510,7 +511,7 @@ export default function Initiatives ({
           />
         )}
         {!showInitiatives ? (
-          <NoResults />
+          <NoResults clearActiveTags={clearActiveTags} />
         ) : (
           renderInitiatives
         )}
