@@ -11,14 +11,9 @@ import {
   AdvancedList,
   ListItem,
   ExternalLink,
-  linkStyles
+  PageLink,
+  EmailLink
 } from 'pages/sharedStyles'
-
-const ContactLink = styled.a.attrs({
-  href: `mailto: ${mainContactEmail}`
-})`
-  ${linkStyles}
-`
 
 const TermsOfUsePage = () => {
   return (
@@ -362,7 +357,7 @@ const TermsOfUsePage = () => {
                 </ListItem>
                 <ListItem small concise>
                   Wszelkie zapytania Użytkowników powinny być kierowane pod
-                  adres mailowy <ContactLink>{mainContactEmail}</ContactLink>.
+                  adres mailowy <EmailLink href={ `mailto: ${mainContactEmail}` }>{mainContactEmail}</EmailLink>.
                 </ListItem>
               </AdvancedList>
             </ListItem>
