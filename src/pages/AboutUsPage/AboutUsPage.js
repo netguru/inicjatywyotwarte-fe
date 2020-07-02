@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { mainContactEmail } from 'constants/constants'
 import { ReactComponent as Illustration } from 'assets/about_us_illustration.svg'
 import styled from 'styled-components'
@@ -35,7 +34,8 @@ import {
   TextContent,
   Header,
   Description,
-  linkStyles
+  PageLink,
+  EmailLink
 } from 'pages/sharedStyles'
 
 const IllustrationContainer = styled.div`
@@ -72,16 +72,6 @@ const TeamContainer = styled.div`
 const StyledHr = styled.hr`
   width: 100%;
   border: 1px solid ${props => props.theme.modalColorVeryLight};
-`
-
-const StyledLink = styled(Link)`
-  ${linkStyles}
-`
-
-const ContactLink = styled.a.attrs({
-  href: `mailto: ${mainContactEmail}`
-})`
-  ${linkStyles}
 `
 
 const AboutUsPage = () => {
@@ -278,7 +268,7 @@ const AboutUsPage = () => {
           <Header>Kontakt</Header>
           <Description small>
             Jeśli chcesz do nas dołączyć, napisz na adres{' '}
-            <ContactLink>{mainContactEmail}</ContactLink> i połączmy siły! Razem
+            <EmailLink href={ `mailto: ${mainContactEmail}` }>{mainContactEmail}</EmailLink> i połączmy siły! Razem
             możemy więcej!
           </Description>
         </TextContent>
@@ -293,7 +283,7 @@ const AboutUsPage = () => {
           <Header>Szukasz więcej?</Header>
           <Description small>
             Zobacz także{' '}
-            <StyledLink to='/pomoc'>“Najczęściej zadawane pytania"</StyledLink>
+            <PageLink to='/pomoc'>“Najczęściej zadawane pytania"</PageLink>
           </Description>
         </TextContent>
       </Container>
