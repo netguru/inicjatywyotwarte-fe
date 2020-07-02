@@ -11,8 +11,7 @@ const getBackgroundColor = theme => hexToRgba(theme.tagBackgroundColor)
 
 const TagItem = styled.div`
   height: 2rem;
-  color: ${props =>
-    props.active ? getBasicTagColor(props.theme) : getBasicTagColor(props.theme)};
+  color: ${props => getBasicTagColor(props.theme)};
   background: ${props => getBackgroundColor(props.theme)};
   box-sizing: border-box;
   border-radius: ${props => props.theme.borderRadiusBig};
