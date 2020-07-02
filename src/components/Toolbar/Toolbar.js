@@ -38,6 +38,20 @@ const StyledNavLink = styled(NavLink)`
   line-height: 1rem;
   color: inherit;
   border-bottom: 2px solid transparent;
+  
+  ${props => props.main && `
+    position: relative;
+  
+    &:after {
+     width: 1px;
+     height: 1rem;
+     content: '';
+     display: block;
+     position: absolute;
+     right: 0;
+     background: ${props.color};
+    }
+  `}
 
   &:hover {
     font-weight: 500;
@@ -49,7 +63,7 @@ const StyledNavLink = styled(NavLink)`
   }
 `
 
-const Item = ({ href, children, color, exact }) => {
+const Item = ({ href, children, color, main, exact }) => {
   const activeStyle =
     {
       fontWeight: '500',
@@ -57,8 +71,10 @@ const Item = ({ href, children, color, exact }) => {
       borderColor: color
     }
 
+    console.log(href, main);
+
   return (
-    <StyledNavLink color={color} activeStyle={activeStyle} exact={exact} to={href}>
+    <StyledNavLink color={color} main={main} activeStyle={activeStyle} exact={exact} to={href}>
       {children}
     </StyledNavLink>
   )
@@ -87,6 +103,7 @@ const Toolbar = () => {
         <Item
           href={'/'}
           color={color}
+          main={true}
           exact
         >
           Wszystkie
