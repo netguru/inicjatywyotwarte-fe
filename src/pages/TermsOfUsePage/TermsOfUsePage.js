@@ -1,6 +1,5 @@
 import React from 'react'
 import { mainContactEmail } from 'constants/constants'
-import styled from 'styled-components'
 import {
   MainContainer,
   Container,
@@ -11,7 +10,6 @@ import {
   AdvancedList,
   ListItem,
   ExternalLink,
-  PageLink,
   EmailLink
 } from 'pages/sharedStyles'
 
