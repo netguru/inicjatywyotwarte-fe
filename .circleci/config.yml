@@ -221,6 +221,7 @@ jobs:
             echo STAGE_NGINX_WWW_PROXY_PASS=${STAGE_NGINX_WWW_PROXY_PASS} >> ./codedeploy/parameters
             echo STAGE_NGINX_LOGIN=${STAGE_NGINX_LOGIN} >> ./codedeploy/parameters
             echo STAGE_NGINX_PASSWORD=${STAGE_NGINX_PASSWORD} >> ./codedeploy/parameters
+            echo ${STAGING_NGINX_HTPASSWD} >> ./codedeploy/deployment/templates/.htpasswd.template
       - attach_workspace:
           at: ~/repo
       - aws-cli/install
