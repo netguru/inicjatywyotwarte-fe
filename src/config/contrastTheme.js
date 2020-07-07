@@ -33,7 +33,7 @@ const contrastTheme = createMuiTheme({
   linkHoverLightColor: 'yellow',
   warningColor: 'yellow',
   tagColor: '#FFFF00',
-  tagBackgroundColor: '#FFFF00',
+  tagBackgroundColor: '#727200',
   resourceTilesWidth: '920px',
   mobileResourceTilesWidth: '93%',
   headerContentWidth: 'calc(920px + 5%)',
