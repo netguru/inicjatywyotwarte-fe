@@ -261,10 +261,10 @@ workflows:
           requires:
             - install_packages
             - test_frontend
-          filters:
-            branches:
-              only:
-                - master
+#          filters:
+#            branches:
+#              only:
+#                - master
 
       - build_production_frontend:
           requires:
@@ -276,10 +276,10 @@ workflows:
                 - production
 
       - upload_new_staging_frontend:
-          filters:
-            branches:
-              only:
-                - master
+#          filters:
+#            branches:
+#              only:
+#                - master
           requires:
             - build_staging_frontend
 
@@ -292,8 +292,8 @@ workflows:
             - build_production_frontend
 
       - push_and_deploy_bundle_staging:
-          filters:
-            branches:
-              only: master
+#          filters:
+#            branches:
+#              only: master
           requires:
             - upload_new_staging_frontend

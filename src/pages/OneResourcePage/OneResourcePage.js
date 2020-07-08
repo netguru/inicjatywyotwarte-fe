@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import { find } from 'lodash'
 import categories from 'constants/categories'
 import { getShrinkedMainHref } from 'shared'
-import { getDataFromAWS } from 'utils/helpers/AwsHelper'
 import { saveOrUpdateLocalVote, isAlreadyUpvoted } from 'utils/VoteManager'
 import { useTheme } from '@material-ui/core/styles';
 
@@ -234,7 +233,8 @@ const OneResourcePage = ({
   useEffect(() => {
     const fetchInitiatives = async () => {
       await axios
-        .get(getDataFromAWS('cached/', 'resources.json'))
+        .get('https://hackcrisis-test.s3.eu-central-1.amazonaws.com/cached/resources.json',
+          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
         .then(res => {
           const { data } = res.data
           const singleInitiative =

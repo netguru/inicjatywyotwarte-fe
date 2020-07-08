@@ -9,7 +9,6 @@ import Pagination from '@material-ui/lab/Pagination'
 import SearchIcon from '@material-ui/icons/Search'
 import FilterListIcon from '@material-ui/icons/FilterList'
 
-import { getDataFromAWS } from 'utils/helpers/AwsHelper'
 import { useLunrSearch } from 'hooks/useLunrSearch'
 
 import Loader from 'components/Loader/Loader'
@@ -276,7 +275,8 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchInitiatives = async () => {
       await axios
-        .get(getDataFromAWS('cached/', 'resources.json'))
+        .get('https://hackcrisis-test.s3.eu-central-1.amazonaws.com/cached/resources.json',
+          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
         .then(res => {
           const { data } = res.data
           const initiatives =
@@ -300,7 +300,8 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchTags = async () => {
       await axios
-        .get(getDataFromAWS('cached/', 'tags.json'))
+        .get('https://hackcrisis-test.s3.eu-central-1.amazonaws.com/cached/tags.json',
+          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
         .then(res => {
           setTagList(res.data)
         })
@@ -314,7 +315,8 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchLocations = async () => {
       await axios
-        .get(getDataFromAWS('cached/', 'locations.json'))
+        .get('https://hackcrisis-test.s3.eu-central-1.amazonaws.com/cached/locations.json',
+          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
         .then(res => {
           setLocationList(res.data)
         })
