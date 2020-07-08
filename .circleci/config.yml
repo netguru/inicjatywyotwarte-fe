@@ -169,7 +169,7 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run: REACT_APP_API_URL=$API_URL_PRODUCTION REACT_APP_ACCESS_KEY_ID=$PROD_STORAGE_ACCESS_KEY_ID REACT_APP_SECRET_ACCESS_KEY=$PROD_STORAGE_SECRET_ACCESS_KEY REACT_APP_REGION=$PROD_STORAGE_REGION REACT_APP_BUCKET=$PROD_STORAGE_BUCKET yarn build
+      - run: REACT_APP_API_URL=$API_URL_PRODUCTION REACT_APP_ACCESS_KEY_ID=$PROD_AWS_STORAGE_ACCESS_KEY_ID REACT_APP_SECRET_ACCESS_KEY=$PROD_AWS_STORAGE_SECRET_ACCESS_KEY REACT_APP_REGION=$PROD_STORAGE_REGION REACT_APP_BUCKET=$PROD_STORAGE_BUCKET yarn build
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -186,8 +186,8 @@ jobs:
           dest: PRODUCTION_BUCKET
           delete: true
           acl_type: private
-          aws_access_key_id: USER_ACCESS_KEY_ID
-          aws_secret_access_key: USER_SECRET_KEY
+          aws_access_key_id: AWS_CODEDEPLOY_USER_ACCESS_KEY_ID
+          aws_secret_access_key: AWS_CODEDEPLOY_USER_SECRET_ACCESS_KEY
 
   upload_new_staging_frontend:
     executor: aws-cli/default
