@@ -103,6 +103,7 @@ const ResourceIcon = styled.div`
     max-width: 100%;
     max-height: 100%;
     border-radius: ${props => props.theme.borderRadiusMedium};
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.1);
   }
 `
 
