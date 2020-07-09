@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { endpoint } from 'constants/constants'
+import { endpoint, origin } from 'constants/constants'
 import styled from 'styled-components'
 import { find } from 'lodash'
 import categories from 'constants/categories'
 import { getShrinkedMainHref } from 'shared'
 import { saveOrUpdateLocalVote, isAlreadyUpvoted } from 'utils/VoteManager'
 import { useTheme } from '@material-ui/core/styles';
-import { getDataFromAWS } from 'utils/helpers/AwsHelper'
+import { getJsonLink } from 'utils/helpers/JsonHelper'
 
 import Loader from 'components/Loader/Loader'
 import Error from 'components/Error/Error'
@@ -234,8 +234,8 @@ const OneResourcePage = ({
   useEffect(() => {
     const fetchInitiatives = async () => {
       await axios
-        .get(getDataFromAWS('resources.json'),
-          { headers: {'Access-Control-Allow-Origin': 'https://inicjatywyotwarte.pl'} })
+        .get(getJsonLink('resources.json'),
+          { headers: {'Access-Control-Allow-Origin': origin} })
         .then(res => {
           const { data } = res.data
           const singleInitiative =
