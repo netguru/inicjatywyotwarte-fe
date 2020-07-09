@@ -7,6 +7,7 @@ import categories from 'constants/categories'
 import { getShrinkedMainHref } from 'shared'
 import { saveOrUpdateLocalVote, isAlreadyUpvoted } from 'utils/VoteManager'
 import { useTheme } from '@material-ui/core/styles';
+import { getDataFromAWS } from 'utils/helpers/AwsHelper'
 
 import Loader from 'components/Loader/Loader'
 import Error from 'components/Error/Error'
@@ -233,7 +234,7 @@ const OneResourcePage = ({
   useEffect(() => {
     const fetchInitiatives = async () => {
       await axios
-        .get('https://hackcrisis-test.s3.eu-central-1.amazonaws.com/cached/resources.json',
+        .get(getDataFromAWS('resources.json'),
           { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
         .then(res => {
           const { data } = res.data
