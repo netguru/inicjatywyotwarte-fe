@@ -5,9 +5,9 @@ import styled from 'styled-components'
 import { find } from 'lodash'
 import categories from 'constants/categories'
 import { getShrinkedMainHref } from 'shared'
-import { getDataFromAWS } from 'utils/helpers/AwsHelper'
 import { saveOrUpdateLocalVote, isAlreadyUpvoted } from 'utils/VoteManager'
 import { useTheme } from '@material-ui/core/styles';
+import { getDataFromAWS } from 'utils/helpers/AwsHelper'
 
 import Loader from 'components/Loader/Loader'
 import Error from 'components/Error/Error'
@@ -234,7 +234,8 @@ const OneResourcePage = ({
   useEffect(() => {
     const fetchInitiatives = async () => {
       await axios
-        .get(getDataFromAWS('cached/', 'resources.json'))
+        .get(getDataFromAWS('resources.json'),
+          { headers: {'Access-Control-Allow-Origin': 'https://inicjatywyotwarte.pl'} })
         .then(res => {
           const { data } = res.data
           const singleInitiative =

@@ -276,7 +276,8 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchInitiatives = async () => {
       await axios
-        .get(getDataFromAWS('cached/', 'resources.json'))
+        .get(getDataFromAWS('resources.json'),
+          { headers: {'Access-Control-Allow-Origin': 'https://inicjatywyotwarte.pl'} })
         .then(res => {
           const { data } = res.data
           const initiatives =
@@ -300,7 +301,8 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchTags = async () => {
       await axios
-        .get(getDataFromAWS('cached/', 'tags.json'))
+        .get(getDataFromAWS('tags.json'),
+          { headers: {'Access-Control-Allow-Origin': 'https://inicjatywyotwarte.pl'} })
         .then(res => {
           setTagList(res.data)
         })
@@ -314,7 +316,8 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchLocations = async () => {
       await axios
-        .get(getDataFromAWS('cached/', 'locations.json'))
+        .get(getDataFromAWS('locations.json'),
+          { headers: {'Access-Control-Allow-Origin': 'https://inicjatywyotwarte.pl'} })
         .then(res => {
           setLocationList(res.data)
         })
