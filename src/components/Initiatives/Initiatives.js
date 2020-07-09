@@ -5,11 +5,12 @@ import axios from 'axios'
 import { map, sortBy, filter, orderBy } from 'lodash'
 // import * as JsSearch from 'js-search'
 
+import { origin } from 'constants/constants'
 import Pagination from '@material-ui/lab/Pagination'
 import SearchIcon from '@material-ui/icons/Search'
 import FilterListIcon from '@material-ui/icons/FilterList'
 
-import { getDataFromAWS } from 'utils/helpers/AwsHelper'
+import { getJsonLink } from 'utils/helpers/JsonHelper'
 import { useLunrSearch } from 'hooks/useLunrSearch'
 
 import Loader from 'components/Loader/Loader'
@@ -276,8 +277,8 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchInitiatives = async () => {
       await axios
-        .get(getDataFromAWS('resources.json'),
-          { headers: {'Access-Control-Allow-Origin': 'https://inicjatywyotwarte.pl'} })
+        .get(getJsonLink('resources.json'),
+          { headers: {'Access-Control-Allow-Origin': origin} })
         .then(res => {
           const { data } = res.data
           const initiatives =
@@ -301,8 +302,8 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchTags = async () => {
       await axios
-        .get(getDataFromAWS('tags.json'),
-          { headers: {'Access-Control-Allow-Origin': 'https://inicjatywyotwarte.pl'} })
+        .get(getJsonLink('tags.json'),
+          { headers: {'Access-Control-Allow-Origin': origin} })
         .then(res => {
           setTagList(res.data)
         })
@@ -316,8 +317,8 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchLocations = async () => {
       await axios
-        .get(getDataFromAWS('locations.json'),
-          { headers: {'Access-Control-Allow-Origin': 'https://inicjatywyotwarte.pl'} })
+        .get(getJsonLink('locations.json'),
+          { headers: {'Access-Control-Allow-Origin': origin} })
         .then(res => {
           setLocationList(res.data)
         })
