@@ -235,7 +235,7 @@ const OneResourcePage = ({
     const fetchInitiatives = async () => {
       await axios
         .get(getDataFromAWS('resources.json'),
-          { crossDomain: true })
+          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
         .then(res => {
           const { data } = res.data
           const singleInitiative =

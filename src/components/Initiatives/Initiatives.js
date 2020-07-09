@@ -277,7 +277,7 @@ export default function Initiatives ({
     const fetchInitiatives = async () => {
       await axios
         .get(getDataFromAWS('resources.json'),
-          { crossDomain: true })
+          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
         .then(res => {
           const { data } = res.data
           const initiatives =
@@ -302,7 +302,7 @@ export default function Initiatives ({
     const fetchTags = async () => {
       await axios
         .get(getDataFromAWS('tags.json'),
-          { crossDomain: true })
+          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
         .then(res => {
           setTagList(res.data)
         })
@@ -317,7 +317,7 @@ export default function Initiatives ({
     const fetchLocations = async () => {
       await axios
         .get(getDataFromAWS('locations.json'),
-          { crossDomain: true })
+          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
         .then(res => {
           setLocationList(res.data)
         })
