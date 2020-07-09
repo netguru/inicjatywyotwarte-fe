@@ -234,7 +234,8 @@ const OneResourcePage = ({
   useEffect(() => {
     const fetchInitiatives = async () => {
       await axios
-        .get(getDataFromAWS('resources.json'))
+        .get(getDataFromAWS('resources.json'),
+          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
         .then(res => {
           const { data } = res.data
           const singleInitiative =
