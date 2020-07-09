@@ -16,5 +16,6 @@ server {
       proxy_redirect     off;
       proxy_pass $STAGE_NGINX_WWW_PROXY_PASS; #bucket name
       proxy_set_header Authorization "";
+      add_header Access-Control-Allow-Origin "*";
     }
 }
