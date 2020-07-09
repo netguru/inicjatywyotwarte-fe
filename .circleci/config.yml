@@ -270,10 +270,10 @@ workflows:
           requires:
             - install_packages
             - test_frontend
-          filters:
-            branches:
-              only:
-                - production
+#          filters:
+#            branches:
+#              only:
+#                - production
 
       - upload_new_staging_frontend:
 #          filters:
@@ -284,10 +284,10 @@ workflows:
             - build_staging_frontend
 
       - upload_production_frontend:
-          filters:
-            branches:
-              only:
-                - production
+#          filters:
+#            branches:
+#              only:
+#                - production
           requires:
             - build_production_frontend
 
