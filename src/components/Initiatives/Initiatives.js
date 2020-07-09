@@ -276,8 +276,7 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchInitiatives = async () => {
       await axios
-        .get(getDataFromAWS('resources.json'),
-          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
+        .get(getDataFromAWS('resources.json'))
         .then(res => {
           const { data } = res.data
           const initiatives =
@@ -301,8 +300,7 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchTags = async () => {
       await axios
-        .get(getDataFromAWS('tags.json'),
-          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
+        .get(getDataFromAWS('tags.json'))
         .then(res => {
           setTagList(res.data)
         })
@@ -316,8 +314,7 @@ export default function Initiatives ({
   useEffect(() => {
     const fetchLocations = async () => {
       await axios
-        .get(getDataFromAWS('locations.json'),
-          { headers: {'Access-Control-Allow-Origin': 'https://quarantine-fe.calluna.devguru.co'} })
+        .get(getDataFromAWS('locations.json'))
         .then(res => {
           setLocationList(res.data)
         })
