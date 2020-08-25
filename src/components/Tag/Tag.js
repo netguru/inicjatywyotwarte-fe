@@ -29,6 +29,7 @@ const TagItem = styled.div`
     box-shadow: 0px 0px 0px 2px ${props => getHoverBorderColor(props.theme)};
   }
 `
+TagItem.displayName = 'TagItem';
 
 const StyledCloseIcon = styled(CloseIcon)`
   margin-left: 0.5rem;

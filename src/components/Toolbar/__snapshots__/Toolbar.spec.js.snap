@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Toolbar match snapshot 1`] = `
+<styled.div>
+  <styled.div>
+    <Item
+      exact={true}
+      href="/"
+      main={true}
+    >
+      Wszystkie
+    </Item>
+    <Item
+      href="/pomoc-sasiedzka"
+    >
+      Pomoc sąsiedzka
+    </Item>
+    <Item
+      href="/lokalne-firmy"
+    >
+      Lokalne firmy
+    </Item>
+    <Item
+      href="/edukacja"
+    >
+      Edukacja
+    </Item>
+    <Item
+      href="/dla-szpitali"
+    >
+      Dla szpitali
+    </Item>
+  </styled.div>
+</styled.div>
+`;

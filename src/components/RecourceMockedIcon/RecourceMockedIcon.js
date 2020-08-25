@@ -18,6 +18,7 @@ const Icon = styled.div`
   ${props => `background: ${props.bgColorName};`}
   ${props => `color: ${props.textColorName};`}
 `
+Icon.displayName = 'Icon';
 
 const maxNumberOfCharacters = 30
 

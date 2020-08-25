@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PersonTile match snapshot 1`] = `
+<PersonTileContainer>
+  <styled.div>
+    <img
+      alt=""
+    />
+  </styled.div>
+  <Name />
+  <Role />
+  <Company />
+</PersonTileContainer>
+`;

@@ -16,6 +16,8 @@ const StyledMainContainer = styled.div`
     min-height: calc(100% - 3 * ${props => props.theme.footerHeight});
   }
 `
+StyledMainContainer.displayName = 'StyledMainContainer';
+
 const GlobalStyle = createGlobalStyle`
   html, body {
     font-size: ${props => props.theme.mainFontSize};

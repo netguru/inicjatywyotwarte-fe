@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopUp match snapshot 1`] = `
+<PopUpContainer
+  shouldShowPopUp={true}
+>
+  <Styled(SummaryButton)
+    onClick={[Function]}
+  >
+    Akceptuję
+  </Styled(SummaryButton)>
+</PopUpContainer>
+`;
