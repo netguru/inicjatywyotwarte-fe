@@ -26,6 +26,7 @@ const StyledLink = styled(Link)`
     box-shadow: ${props => props.theme.shadowButtonHover};
   }
 `
+StyledLink.displayName = 'SummaryLink';
 
 const StyledButton = styled.div`
   ${ButtonStyles}
@@ -37,6 +38,7 @@ const StyledButton = styled.div`
     box-shadow: ${props => props.theme.shadowButtonHover};
   }
 `
+StyledButton.displayName = 'SummaryButton';
 
 const SummaryButton = ({ to = '', onClick, children, className }) => {
   if (!to && onClick) {
