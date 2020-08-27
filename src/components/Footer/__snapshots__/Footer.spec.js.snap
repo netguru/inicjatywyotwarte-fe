@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer match snapshot 1`] = `
+<FooterMainContainer>
+  <styled.div>
+    <styled.div>
+      Inicjatywy Otwarte © 2020
+    </styled.div>
+    <styled.div>
+      <styled.div>
+        <Styled(Link)
+          to="/polityka-prywatnosci"
+        >
+          Polityka 
+          <br />
+          prywatności
+        </Styled(Link)>
+      </styled.div>
+      <styled.div>
+        <Styled(Link)
+          to="/regulamin-strony"
+        >
+          Regulamin 
+          <br />
+          strony
+        </Styled(Link)>
+      </styled.div>
+      <styled.div>
+        <Styled(Link)
+          to="/pomoc"
+        >
+          Pomoc
+        </Styled(Link)>
+      </styled.div>
+      <styled.div>
+        <Styled(Link)
+          to="/o-nas"
+        >
+          O nas
+        </Styled(Link)>
+      </styled.div>
+    </styled.div>
+  </styled.div>
+</FooterMainContainer>
+`;
