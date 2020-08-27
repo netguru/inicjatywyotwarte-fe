@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TextareaField match snapshot 1`] = `
+<InputBox>
+  <styled.label
+    htmlFor="name"
+  >
+    label
+  </styled.label>
+  <Textarea
+    id="name"
+    invalid={false}
+    onInput={[Function]}
+  />
+</InputBox>
+`;
