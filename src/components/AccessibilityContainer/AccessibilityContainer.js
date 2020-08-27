@@ -21,6 +21,7 @@ const StyledToggleContrastButton = styled.a`
     width: 60%;
   }
 `
+StyledToggleContrastButton.displayName = 'StyledToggleContrastButton';
 
 function AccessibilityContainer ({theme, toggleContrast}) {
   return (

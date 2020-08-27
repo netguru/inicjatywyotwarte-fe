@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccessibilityContainer match snapshot 1`] = `
+<Fragment>
+  <StyledToggleContrastButton
+    onClick={
+      [MockFunction] {
+        "calls": Array [
+          Array [],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": undefined,
+          },
+        ],
+      }
+    }
+  >
+    <ForwardRef(SvgContrastIcon) />
+     Kontrast
+  </StyledToggleContrastButton>
+</Fragment>
+`;
