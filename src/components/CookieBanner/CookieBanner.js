@@ -20,6 +20,7 @@ const Banner = styled.div`
   line-height: 1.4rem;
   border-radius: ${props => props.theme.borderRadiusMedium};
 `
+Banner.displayName = 'Banner';
 
 const StyledLink = styled(Link)`
   text-decoration: none;
