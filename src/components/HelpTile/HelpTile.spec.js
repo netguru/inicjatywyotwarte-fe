@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import toJson from 'enzyme-to-json';
 
 describe('HelpTile', () => {
-  test('renders help til with proper ', () => {
+  test('renders help tile with proper data', () => {
     const wrapper = shallow(
       <HelpTile
         headerText="header text"

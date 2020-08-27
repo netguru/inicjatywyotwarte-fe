@@ -14,9 +14,7 @@ exports[`ResourceTile match snapshot 1`] = `
     <styled.h2>
       <Styled(Link)
         to="/zasob/1"
-      >
-        Title
-      </Styled(Link)>
+      />
     </styled.h2>
     <styled.p />
     <styled.div>
