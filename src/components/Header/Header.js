@@ -186,7 +186,7 @@ const Header = ({ pathname, toggleContrast, toggleIncreaseFontSize }) => {
         <HeaderTop>
           <StyledLink to='/'>
             <IconContainer>
-              <Icon />
+              <Icon data-cy="header-logo-icon" />
             </IconContainer>
           </StyledLink>
           <ButtonsWrapper>

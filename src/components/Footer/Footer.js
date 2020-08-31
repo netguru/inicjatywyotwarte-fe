@@ -54,7 +54,7 @@ const LinkWrapper = styled.div`
   }
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link).attrs(() => ({ 'data-cy': 'footer-navigation-link' }))`
   color: inherit;
   text-decoration: none;
   text-align: center;

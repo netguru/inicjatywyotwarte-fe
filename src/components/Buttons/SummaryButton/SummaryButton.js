@@ -16,7 +16,7 @@ const ButtonStyles = `
   cursor: pointer;
 `
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(Link).attrs(() => ({ "data-cy": "cookies-banner-accept" }))`
   ${ButtonStyles}
   border: 2px solid ${props => props.theme.modalColorVeryLight};
   background: ${props => props.theme.lightBackgroundColor};
@@ -27,7 +27,7 @@ const StyledLink = styled(Link)`
   }
 `
 
-const StyledButton = styled.div`
+const StyledButton = styled.div.attrs(() => ({ "data-cy": "cookies-banner-accept" }))`
   ${ButtonStyles}
   border: 2px solid ${props => props.theme.modalColorVeryLight};
   background: ${props => props.theme.lightBackgroundColor};

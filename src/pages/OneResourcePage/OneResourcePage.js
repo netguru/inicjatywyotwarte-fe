@@ -233,23 +233,76 @@ const OneResourcePage = ({
 
   useEffect(() => {
     const fetchInitiatives = async () => {
-      await axios
-        .get(getJsonLink('resources.json'),
-          { headers: {'Access-Control-Allow-Origin': origin} })
-        .then(res => {
-          const { data } = res.data
-          const singleInitiative =
-            resourceId
-              ? find(data, ['id', resourceId])
-              : null
-          setInitiative(singleInitiative)
-        })
-        .catch(err => {
-          console.error('Nie udało się pobrać inicjatyw: ', err.message)
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
+      if (process.env.NODE_ENV === 'development') {
+        const data = [
+          {
+            id: "1",
+            type: "resources",
+            attributes: {
+              name: 'example initiative name',
+              description: 'desc',
+              location: 'loc',
+              category: 'education',
+              thumbnail_url: null,
+              target_url: 'targetUrl',
+              ios_url: 'iosUrl',
+              android_url: 'androidUrl',
+              facebook_url: 'facebookUrl',
+              contact: 'contact',
+              organizer: 'organizer',
+              upvotes_count: 23,
+              already_upvoted: false,
+              how_to_help: 'How to help',
+              tag_list: ['elder_people']
+            }
+          },
+          {
+            id: "2",
+            type: "resources",
+            attributes: {
+              name: 'we love to help people',
+              description: 'desc2',
+              location: 'Plock',
+              category: 'local_firms',
+              thumbnail_url: null,
+              target_url: 'targetUrl',
+              ios_url: 'iosUrl',
+              android_url: 'androidUrl',
+              facebook_url: 'facebookUrl',
+              contact: 'contact2',
+              organizer: 'organizer2',
+              upvotes_count: 13,
+              already_upvoted: false,
+              how_to_help: 'How to help2',
+              tag_list: ['hospitals']
+            }
+          }
+        ]
+        const singleInitiative =
+          resourceId
+            ? find(data, ['id', resourceId])
+            : null
+        setInitiative(singleInitiative)
+        setIsLoading(false)
+      } else {
+        await axios
+          .get(getJsonLink('resources.json'),
+            { headers: {'Access-Control-Allow-Origin': origin} })
+          .then(res => {
+            const { data } = res.data
+            const singleInitiative =
+              resourceId
+                ? find(data, ['id', resourceId])
+                : null
+            setInitiative(singleInitiative)
+          })
+          .catch(err => {
+            console.error('Nie udało się pobrać inicjatyw: ', err.message)
+          })
+          .finally(() => {
+            setIsLoading(false)
+          })
+      }
     }
     fetchInitiatives()
   }, [resourceId])

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-const AddButton = styled(Link)`
+const AddButton = styled(Link).attrs(() => ({ 'data-cy': 'add-initative-button' }))`
   color: ${props => props.theme.fontColorDark};
   font-size: 0.85rem;
   padding: 0 1rem;

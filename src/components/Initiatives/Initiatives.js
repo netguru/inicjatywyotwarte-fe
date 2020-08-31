@@ -83,7 +83,7 @@ const Header = styled.div`
   }
 `
 
-const ResultsDescription = styled.div`
+const ResultsDescription = styled.div.attrs(() => ({ 'data-cy': 'result-description' }))`
   height: 40px;
   display: flex;
   align-items: center;
@@ -276,55 +276,154 @@ export default function Initiatives ({
 
   useEffect(() => {
     const fetchInitiatives = async () => {
-      await axios
-        .get(getJsonLink('resources.json'),
-          { headers: {'Access-Control-Allow-Origin': origin} })
-        .then(res => {
-          const { data } = res.data
-          const initiatives =
-            category
-              ? filter(data, ['attributes.category', category])
-              : data
+      if (process.env.NODE_ENV === 'development') {
+        const mockedInitiatives = [
+          {
+            id: "1",
+            type: "resources",
+            attributes: {
+              name: 'example initiative name',
+              description: 'desc',
+              location: 'loc',
+              category: 'education',
+              thumbnail_url: null,
+              target_url: 'targetUrl',
+              ios_url: 'iosUrl',
+              android_url: 'androidUrl',
+              facebook_url: 'facebookUrl',
+              contact: 'contact',
+              organizer: 'organizer',
+              upvotes_count: 23,
+              already_upvoted: false,
+              how_to_help: 'How to help',
+              tag_list: ['elder_people']
+            }
+          },
+          {
+            id: "2",
+            type: "resources",
+            attributes: {
+              name: 'we love to help people',
+              description: 'desc2',
+              location: 'Plock',
+              category: 'neighbourly_help',
+              thumbnail_url: null,
+              target_url: 'targetUrl',
+              ios_url: 'iosUrl',
+              android_url: 'androidUrl',
+              facebook_url: 'facebookUrl',
+              contact: 'contact2',
+              organizer: 'organizer2',
+              upvotes_count: 13,
+              already_upvoted: false,
+              how_to_help: 'How to help2',
+              tag_list: ['hospitals']
+            }
+          }
+        ]
+        setInitiatives(category ? filter(mockedInitiatives, ['attributes.category', category]) : mockedInitiatives);
+        setPageSize(10)
+        setIsLoading(false)
+      } else {
+        await axios
+          .get(getJsonLink('resources.json'),
+            { headers: {'Access-Control-Allow-Origin': origin} })
+          .then(res => {
+            const { data } = res.data
+            const initiatives =
+              category
+                ? filter(data, ['attributes.category', category])
+                : data
 
-          setInitiatives(initiatives)
-        })
-        .catch(err => {
-          console.error('Nie udało się pobrać inicjatyw: ', err.message)
-        })
-        .finally(() => {
-          setPageSize(10)
-          setIsLoading(false)
-        })
+            setInitiatives(initiatives)
+          })
+          .catch(err => {
+            console.error('Nie udało się pobrać inicjatyw: ', err.message)
+          })
+          .finally(() => {
+            setPageSize(10)
+            setIsLoading(false)
+          })
+      }
     }
     fetchInitiatives()
   }, [category])
 
   useEffect(() => {
     const fetchTags = async () => {
-      await axios
-        .get(getJsonLink('tags.json'),
-          { headers: {'Access-Control-Allow-Origin': origin} })
-        .then(res => {
-          setTagList(res.data)
-        })
-        .catch(err => {
-          console.error('Nie udało się pobrać tagów: ', err.message)
-        })
+      if (process.env.NODE_ENV === 'development') {
+        setTagList(
+          {
+            data:
+              [
+                {
+                  id: '1',
+                  type: 'tags',
+                  attributes: {
+                    name: 'hospitals'
+                  }
+                },
+                {
+                  id: '2',
+                  type: 'tags',
+                  attributes: {
+                    name: 'elder people'
+                  }
+                }
+              ]
+          }
+        );
+      } else {
+        await axios
+          .get(getJsonLink('tags.json'),
+            { headers: {'Access-Control-Allow-Origin': origin} })
+          .then(res => {
+            setTagList(res.data)
+          })
+          .catch(err => {
+            console.error('Nie udało się pobrać tagów: ', err.message)
+          })
+      }
     }
     fetchTags()
   },[])
 
   useEffect(() => {
     const fetchLocations = async () => {
-      await axios
-        .get(getJsonLink('locations.json'),
-          { headers: {'Access-Control-Allow-Origin': origin} })
-        .then(res => {
-          setLocationList(res.data)
-        })
-        .catch(err => {
-          console.error('Nie udało się pobrać lokacji: ', err.message)
-        })
+
+      if (process.env.NODE_ENV === 'development') {
+        const mockedData = {
+          data: [
+            {
+              id: '0',
+              type: 'locations',
+              attributes: {
+                name: "",
+                resources_count: 1
+              }
+            },
+            {
+              id: '1',
+              type: 'locations',
+              attributes: {
+                name: "Plock",
+                resources_count: 1
+              }
+            }
+          ]
+        };
+        setLocationList(mockedData);
+      } else {
+        await axios
+          .get(getJsonLink('locations.json'),
+            { headers: {'Access-Control-Allow-Origin': origin} })
+          .then(res => {
+            setLocationList(res.data)
+          })
+          .catch(err => {
+            console.error('Nie udało się pobrać lokacji: ', err.message)
+          })
+      }
     }
     fetchLocations()
   }, [])
