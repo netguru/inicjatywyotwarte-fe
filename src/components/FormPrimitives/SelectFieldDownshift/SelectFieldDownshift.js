@@ -64,7 +64,7 @@ const SelectMenu = styled.ul`
   outline: none;
 `
 
-const ClearButton = styled.button`
+const ClearButton = styled.button.attrs(props => ({ 'data-cy': 'clear-location-filter' }))`
   position: absolute;
   right: 10px;
   top: 50%;
