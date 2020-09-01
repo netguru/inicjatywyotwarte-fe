@@ -59,7 +59,8 @@ const StyledArrowBack = styled(ArrowBackIcon)`
 `
 
 const GoBackButton = styled.button.attrs({
-  'aria-label': 'wróć'
+  'aria-label': 'wróć',
+  'data-cy': 'one-resource-page-go-back-button'
 })`
   color: ${props => props.theme.fontColorDark};
   background: transparent;
@@ -79,7 +80,7 @@ const GoBackButton = styled.button.attrs({
   }
 `
 
-const Header = styled.header`
+const Header = styled.header.attrs(props => ({ 'data-cy': 'one-resource-page-header' }))`
   display: flex;
   margin-bottom: 4rem;
 

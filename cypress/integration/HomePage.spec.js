@@ -12,6 +12,4 @@ describe('Home Page', () => {
   it('starts at suggested initiatives page', () => {
     cy.get('[data-cy="result-description"]').contains('Proponowane')
   })
-
-
 })
