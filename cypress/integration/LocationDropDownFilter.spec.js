@@ -1,4 +1,4 @@
-describe('Tag filtering', () => {
+describe('Location drop down filter', () => {
   beforeEach(() => {
     cy.visit('/');
     window.localStorage.setItem('areCookiesAccepted', 'true')

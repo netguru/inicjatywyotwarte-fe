@@ -165,7 +165,7 @@ const SearchInput = styled.input.attrs({
   }
 `
 
-const SearchClearButton = styled.button`
+const SearchClearButton = styled.button.attrs(props => ({ 'data-cy': 'clear-search-input' }))`
   position: absolute;
   right: 10px;
   top: 50%;
