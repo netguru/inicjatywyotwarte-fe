@@ -116,7 +116,8 @@ const SearchBox = styled.div`
 `
 
 const ExpandTagsButton = styled.button.attrs({
-  'aria-label': 'rozwiń listę tagów'
+  'aria-label': 'rozwiń listę tagów',
+  'cy-data': 'expand-tags-button',
 })`
   height: 40px;
   width: 90px;
@@ -282,41 +283,41 @@ export default function Initiatives ({
             id: "1",
             type: "resources",
             attributes: {
-              name: 'example initiative name',
-              description: 'desc',
-              location: 'loc',
-              category: 'education',
+              name: 'Help for elder people',
+              description: 'We are helping elder people',
+              location: 'Warsaw',
+              category: 'neighbourly_help',
               thumbnail_url: null,
-              target_url: 'targetUrl',
-              ios_url: 'iosUrl',
-              android_url: 'androidUrl',
-              facebook_url: 'facebookUrl',
-              contact: 'contact',
-              organizer: 'organizer',
+              target_url: 'http://wehelp.elder/',
+              ios_url: 'http://iosWeHelpElder.com/',
+              android_url: 'http://androidWeHelpElder.com/',
+              facebook_url: 'https://fbWeHelpElder.com/',
+              contact: 'Anna',
+              organizer: 'Michal',
               upvotes_count: 23,
               already_upvoted: false,
-              how_to_help: 'How to help',
-              tag_list: ['elder_people']
+              how_to_help: 'Contact us',
+              tag_list: ['elder people']
             }
           },
           {
             id: "2",
             type: "resources",
             attributes: {
-              name: 'we love to help people',
-              description: 'desc2',
-              location: 'Plock',
-              category: 'neighbourly_help',
+              name: 'Help for hospitals',
+              description: 'We are helping hospitals',
+              location: 'Poznan',
+              category: 'for_hospitals',
               thumbnail_url: null,
-              target_url: 'targetUrl',
-              ios_url: 'iosUrl',
-              android_url: 'androidUrl',
-              facebook_url: 'facebookUrl',
-              contact: 'contact2',
-              organizer: 'organizer2',
+              target_url: 'http://wehelp.hospitals/',
+              ios_url: 'http://iosWeHelphospitals.com/',
+              android_url: 'http://androidWeHelphospitals.com/',
+              facebook_url: 'https://fbWeHelphospitals.com/',
+              contact: 'Jan',
+              organizer: 'Tom',
               upvotes_count: 13,
               already_upvoted: false,
-              how_to_help: 'How to help2',
+              how_to_help: 'Visit us and ask',
               tag_list: ['hospitals']
             }
           }
@@ -398,7 +399,7 @@ export default function Initiatives ({
               id: '0',
               type: 'locations',
               attributes: {
-                name: "",
+                name: "Warsaw",
                 resources_count: 1
               }
             },
@@ -406,7 +407,7 @@ export default function Initiatives ({
               id: '1',
               type: 'locations',
               attributes: {
-                name: "Plock",
+                name: "Poznan",
                 resources_count: 1
               }
             }

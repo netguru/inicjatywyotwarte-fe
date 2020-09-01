@@ -9,7 +9,7 @@ const getHoverBorderColor = theme => hexToRgba(getBasicTagColor(theme), '0.2')
 
 const getBackgroundColor = theme => hexToRgba(theme.tagBackgroundColor)
 
-const TagItem = styled.div`
+const TagItem = styled.div.attrs(props => ({ 'data-cy': 'tag-item' }))`
   height: 2rem;
   color: ${props =>
     props.active ? props.theme.fontColorLight : getBasicTagColor(props.theme)};
