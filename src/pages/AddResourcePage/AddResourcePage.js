@@ -58,7 +58,7 @@ const SubmitButton = styled.button.attrs({
   }
 `
 
-const ResultContentWrapper = styled.div`
+const ResultContentWrapper = styled.div.attrs(props => ({ 'data-cy': 'thanks-for-adding-resource' }))`
   text-align: center;
   width: 70%;
   margin: 0 auto;
