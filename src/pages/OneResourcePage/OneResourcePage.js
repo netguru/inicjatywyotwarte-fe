@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-import { endpoint, origin } from 'constants/constants'
+import { endpoint } from 'constants/constants'
 import styled from 'styled-components'
 import { find } from 'lodash'
 import categories from 'constants/categories'
 import { getShrinkedMainHref } from 'shared'
 import { saveOrUpdateLocalVote, isAlreadyUpvoted } from 'utils/VoteManager'
 import { useTheme } from '@material-ui/core/styles';
-import { getJsonLink } from 'utils/helpers/JsonHelper'
+import useFetchedInitiatives from 'hooks/useFetchedInitiatives'
 
 import Loader from 'components/Loader/Loader'
 import Error from 'components/Error/Error'
@@ -225,88 +225,19 @@ const OneResourcePage = ({
 }) => {
   const theme = useTheme()
   const resourceId = match.params.id
-  const [initiative, setInitiative] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [initiatives, isLoading] = useFetchedInitiatives()
   const [votesCount, setVotesCount] = useState(null)
   const [alreadyUpvoted, setAlreadyUpvoted] = useState(
     isAlreadyUpvoted(resourceId)
   )
 
-  useEffect(() => {
-    const fetchInitiatives = async () => {
-      if (process.env.NODE_ENV === 'development') {
-        const data = [
-          {
-            id: "1",
-            type: "resources",
-            attributes: {
-              name: 'Help for elder people',
-              description: 'We are helping elder people',
-              location: 'Warsaw',
-              category: 'neighbourly_help',
-              thumbnail_url: null,
-              target_url: 'http://wehelp.elder/',
-              ios_url: 'http://iosWeHelpElder.com/',
-              android_url: 'http://androidWeHelpElder.com/',
-              facebook_url: 'https://fbWeHelpElder.com/',
-              contact: 'Anna',
-              organizer: 'Michal',
-              upvotes_count: 23,
-              already_upvoted: false,
-              how_to_help: 'Contact us',
-              tag_list: ['elder_people']
-            }
-          },
-          {
-            id: "2",
-            type: "resources",
-            attributes: {
-              name: 'Help for hospitals',
-              description: 'We are helping hospitals',
-              location: 'Poznan',
-              category: 'for_hospitals',
-              thumbnail_url: null,
-              target_url: 'http://wehelp.hospitals/',
-              ios_url: 'http://iosWeHelphospitals.com/',
-              android_url: 'http://androidWeHelphospitals.com/',
-              facebook_url: 'https://fbWeHelphospitals.com/',
-              contact: 'Jan',
-              organizer: 'Tom',
-              upvotes_count: 13,
-              already_upvoted: false,
-              how_to_help: 'Visit us and ask',
-              tag_list: ['hospitals']
-            }
-          }
-        ]
-        const singleInitiative =
-          resourceId
-            ? find(data, ['id', resourceId])
-            : null
-        setInitiative(singleInitiative)
-        setIsLoading(false)
-      } else {
-        await axios
-          .get(getJsonLink('resources.json'),
-            { headers: {'Access-Control-Allow-Origin': origin} })
-          .then(res => {
-            const { data } = res.data
-            const singleInitiative =
-              resourceId
-                ? find(data, ['id', resourceId])
-                : null
-            setInitiative(singleInitiative)
-          })
-          .catch(err => {
-            console.error('Nie udało się pobrać inicjatyw: ', err.message)
-          })
-          .finally(() => {
-            setIsLoading(false)
-          })
-      }
-    }
-    fetchInitiatives()
-  }, [resourceId])
+  const initiative = () => {
+    const singleInitiative =
+      resourceId
+        ? find(initiatives, ['id', resourceId])
+        : null
+    return singleInitiative
+  }
 
   const vote = async () => {
     const value = alreadyUpvoted ? 0 : 1
@@ -362,7 +293,7 @@ const OneResourcePage = ({
     tag_list: tags,
     how_to_help: howToHelp,
     upvotes_count: upvotesCount
-  } = initiative.attributes
+  } = initiative().attributes
 
   const platformTiles = []
   if (androidUrl) {

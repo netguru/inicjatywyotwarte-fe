@@ -1,21 +1,40 @@
-import { mockedInitiativesData } from '../constants/mockedData'
-import { getJsonLink } from '../utils/helpers/JsonHelper'
+import { mockedInitiatives } from 'constants/mockedData'
+import { getJsonLink } from 'utils/helpers/JsonHelper'
+import { filter } from 'lodash'
 import axios from 'axios'
+import { useState, useEffect } from 'react'
 
-const fetchInitiativesFromBucket = async () => {
-  await axios
-    .get(getJsonLink('resources.json'),
-      { headers: {'Access-Control-Allow-Origin': origin} })
-    .then(res => {
-      return res.data
-    })
-    .catch(err => {
-      console.error('Nie udało się pobrać inicjatyw: ', err.message)
-    })
+const isDevelopmentEnv = process.env.NODE_ENV === 'development'
+
+const filterInitiatives = (initiatives, category) => {
+  return category ? filter(initiatives, ['attributes.category', category]) : initiatives
 };
 
-export const useFetchedInitiatives = () => {
-  return process.env.NODE_ENV === 'development'
-    ? mockedInitiativesData
-    : fetchInitiativesFromBucket();
+const useFetchedInitiatives = (category) => {
+  const [initiatives, setInitiatives] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchInitiatives = async () => {
+      await axios.get(getJsonLink('resources.json'), { headers: { 'Access-Control-Allow-Origin': origin }
+      }).then(res => {
+        setInitiatives(filterInitiatives(res.data, category))
+      }).catch(err => {
+        console.error('Nie udało się pobrać inicjatyw: ', err.message)
+      }).finally(() => {
+        setIsLoading(false)
+      })
+    }
+
+    if (isDevelopmentEnv) {
+      setInitiatives(filterInitiatives(mockedInitiatives, category))
+      setIsLoading(false)
+    } else {
+      fetchInitiatives();
+    }
+  }, [category]);
+
+  return [initiatives, isLoading];
 }
+
+export default useFetchedInitiatives

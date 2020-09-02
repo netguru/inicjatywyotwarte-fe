@@ -2,13 +2,14 @@ import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
-import { map, sortBy, filter, orderBy } from 'lodash'
+import { map, sortBy, orderBy } from 'lodash'
 // import * as JsSearch from 'js-search'
 
 import { origin } from 'constants/constants'
 import Pagination from '@material-ui/lab/Pagination'
 import SearchIcon from '@material-ui/icons/Search'
 import FilterListIcon from '@material-ui/icons/FilterList'
+import useFetchedInitiatives from 'hooks/useFetchedInitiatives'
 
 import { getJsonLink } from 'utils/helpers/JsonHelper'
 import { useLunrSearch } from 'hooks/useLunrSearch'
@@ -29,7 +30,6 @@ const SvgSearchIcon = styled(SearchIcon)`
 `
 
 const PaginationWrapper = styled(Pagination)`
-
   ${props => props.theme.contrastSvgIcon
     ? `
       li > div {
@@ -257,11 +257,18 @@ export default function Initiatives ({
 }) {
   const history = useHistory()
   const searchPhrase = getSearchPhrase(history) //getting initial search params from url
-  const [initiatives, setInitiatives] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [pageSize, setPageSize] = useState(0)
+
+  // initiatives
+  const [initiatives, isLoading] = useFetchedInitiatives(category)
+
+  // tags
   const [tagList, setTagList] = useState([])
+
+  // locations
   const [locationList, setLocationList] = useState([])
+
+  // OTHER
+  const pageSize = 10
   const [currentPage, setCurrentPage] = useState(page || 1)
   const [isTagsListOpen, setIsTagsListOpen] = useState(false)
   const [activeSearchTags, setActiveSearchTags] = useState([])
@@ -274,81 +281,6 @@ export default function Initiatives ({
 
   const searchText = getSearchPhrase(history)
   const clearActiveTags = () => setActiveSearchTags([])
-
-  useEffect(() => {
-    const fetchInitiatives = async () => {
-      if (process.env.NODE_ENV === 'development') {
-        const mockedInitiatives = [
-          {
-            id: "1",
-            type: "resources",
-            attributes: {
-              name: 'Help for elder people',
-              description: 'We are helping elder people',
-              location: 'Warsaw',
-              category: 'neighbourly_help',
-              thumbnail_url: null,
-              target_url: 'http://wehelp.elder/',
-              ios_url: 'http://iosWeHelpElder.com/',
-              android_url: 'http://androidWeHelpElder.com/',
-              facebook_url: 'https://fbWeHelpElder.com/',
-              contact: 'Anna',
-              organizer: 'Michal',
-              upvotes_count: 23,
-              already_upvoted: false,
-              how_to_help: 'Contact us',
-              tag_list: ['elder people']
-            }
-          },
-          {
-            id: "2",
-            type: "resources",
-            attributes: {
-              name: 'Help for hospitals',
-              description: 'We are helping hospitals',
-              location: 'Poznan',
-              category: 'for_hospitals',
-              thumbnail_url: null,
-              target_url: 'http://wehelp.hospitals/',
-              ios_url: 'http://iosWeHelphospitals.com/',
-              android_url: 'http://androidWeHelphospitals.com/',
-              facebook_url: 'https://fbWeHelphospitals.com/',
-              contact: 'Jan',
-              organizer: 'Tom',
-              upvotes_count: 13,
-              already_upvoted: false,
-              how_to_help: 'Visit us and ask',
-              tag_list: ['hospitals']
-            }
-          }
-        ]
-        setInitiatives(category ? filter(mockedInitiatives, ['attributes.category', category]) : mockedInitiatives);
-        setPageSize(10)
-        setIsLoading(false)
-      } else {
-        await axios
-          .get(getJsonLink('resources.json'),
-            { headers: {'Access-Control-Allow-Origin': origin} })
-          .then(res => {
-            const { data } = res.data
-            const initiatives =
-              category
-                ? filter(data, ['attributes.category', category])
-                : data
-
-            setInitiatives(initiatives)
-          })
-          .catch(err => {
-            console.error('Nie udało się pobrać inicjatyw: ', err.message)
-          })
-          .finally(() => {
-            setPageSize(10)
-            setIsLoading(false)
-          })
-      }
-    }
-    fetchInitiatives()
-  }, [category])
 
   useEffect(() => {
     const fetchTags = async () => {
