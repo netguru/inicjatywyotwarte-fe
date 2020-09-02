@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResourceMockedIcon match snapshot 1`] = `
+<Icon
+  size={50}
+>
+  Title
+</Icon>
+`;

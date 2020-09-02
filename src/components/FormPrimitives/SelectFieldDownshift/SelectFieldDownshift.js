@@ -11,11 +11,13 @@ const SelectItem = styled.li`
   box-sizing: border-box;
   padding: 0 1.3rem;
 `
+SelectItem.displayName = "SelectItem";
 
 const SelectWrapper = styled.div`
   position: relative;
   margin: 0 1rem;
 `
+SelectWrapper.displayName = "SelectWrapper";
 
 const SelectButton = styled.button`
   height: 40px;
@@ -44,6 +46,7 @@ const SelectButton = styled.button`
   justify-content: left;
   align-items: center;
 `
+SelectButton.displayName = "SelectButton";
 
 const SelectMenu = styled.ul`
   position: absolute;
@@ -63,6 +66,7 @@ const SelectMenu = styled.ul`
   z-index: 1;
   outline: none;
 `
+SelectMenu.displayName = "SelectMenu";
 
 const ClearButton = styled.button`
   position: absolute;
@@ -76,6 +80,7 @@ const ClearButton = styled.button`
   height: 30px;
   color: ${props => props.theme.addInitiativeButtonBorderColor}
 `
+ClearButton.displayName = "ClearButton";
 
 export default function SelectFieldDownshift({
   selectedItem,

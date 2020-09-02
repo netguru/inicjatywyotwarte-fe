@@ -9,6 +9,7 @@ const InputBox = styled.div`
   margin-bottom: 1.5rem;
   width: 100%;
 `
+InputBox.displayName = "InputBox";
 
 const Select = styled.select`
   height: 3rem;
@@ -35,6 +36,7 @@ const Select = styled.select`
   background-position-x: 95%;
   cursor: pointer;
 `
+Select.displayName = "Select";
 
 export default function SelectField({
   name,

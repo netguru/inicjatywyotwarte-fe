@@ -36,6 +36,7 @@ const Button = styled.a.attrs({
     border-color: ${props => props.theme.fontColorDark};
   }
 `
+Button.displayName = 'PlatformButton';
 
 export default function PlatformButton ({ url, platform, size }) {
   const icon =

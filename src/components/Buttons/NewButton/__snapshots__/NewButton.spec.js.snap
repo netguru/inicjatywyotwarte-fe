@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NewButton match snapshot 1`] = `
+<AddButton
+  to="/dodaj-inicjatywe"
+>
+  + Dodaj inicjatywę
+</AddButton>
+`;

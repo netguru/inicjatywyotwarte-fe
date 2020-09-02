@@ -12,6 +12,8 @@ const MainContainer = styled.div`
     height: calc(2 * ${props => props.theme.footerHeight});
   }
 `
+MainContainer.displayName = 'FooterMainContainer';
+
 
 const ContentWrapper = styled.div`
   width: ${props => props.theme.resourceTilesWidth};

@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResourceTile match snapshot 1`] = `
+<ResourceTileContainer>
+  <Styled(Link)
+    to="/zasob/1"
+  >
+    <img
+      alt="logo inicjatywy"
+      src="http://iconurl.test"
+    />
+  </Styled(Link)>
+  <styled.div>
+    <styled.h2>
+      <Styled(Link)
+        to="/zasob/1"
+      />
+    </styled.h2>
+    <styled.p />
+    <styled.div>
+      <styled.div>
+        <styled.div>
+          <ForwardRef(SvgTagPin) />
+        </styled.div>
+        Warsaw
+      </styled.div>
+      <ResourceUrl
+        href="http://resourceTesturl.test"
+      />
+    </styled.div>
+  </styled.div>
+  <styled.div>
+    <styled.div>
+      <VoteButton
+        alreadyUpvoted={false}
+        handleVote={[Function]}
+        votesCount={0}
+      />
+    </styled.div>
+    <styled.address>
+      <styled.div>
+        <PlatformButton
+          key="android"
+          platform="android"
+          url="http://androidTesturl.test"
+        />
+      </styled.div>
+      <styled.div>
+        <PlatformButton
+          key="ios"
+          platform="ios"
+          url="http://iosTesturl.test"
+        />
+      </styled.div>
+      <styled.div>
+        <PlatformButton
+          key="fb"
+          platform="fb"
+          url="http://fbTesturl.test"
+        />
+      </styled.div>
+    </styled.address>
+  </styled.div>
+</ResourceTileContainer>
+`;

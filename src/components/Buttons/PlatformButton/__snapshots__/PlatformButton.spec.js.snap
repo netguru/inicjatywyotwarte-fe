@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlatformButton match snapshot 1`] = `
+<PlatformButton
+  href="http://example.test"
+  size="50"
+>
+  <AndroidIcon
+    fontSize="inherit"
+  />
+</PlatformButton>
+`;

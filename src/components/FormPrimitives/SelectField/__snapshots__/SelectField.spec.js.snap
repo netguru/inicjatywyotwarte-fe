@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectField match snapshot 1`] = `
+<InputBox>
+  <styled.label
+    htmlFor="name"
+  >
+    label
+  </styled.label>
+  <Select
+    id="name"
+  >
+    <option
+      key="1"
+      value={1}
+    />
+    <option
+      key="2"
+      value={2}
+    />
+    <option
+      key="3"
+      value={3}
+    />
+  </Select>
+</InputBox>
+`;

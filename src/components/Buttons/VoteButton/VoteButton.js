@@ -39,8 +39,8 @@ const UpvoteButton = styled.button`
       color: ${props => props.theme.lightBackgroundColor};
     }
   }
-
 `
+UpvoteButton.displayName = 'UpvoteButton';
 
 export default function VoteButton ({
   votesCount,

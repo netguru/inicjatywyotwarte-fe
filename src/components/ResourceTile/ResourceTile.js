@@ -23,6 +23,7 @@ const ResourceTileContainer = styled.div`
     flex-direction: column;
   }
 `
+ResourceTileContainer.displayName = 'ResourceTileContainer';
 
 const ResourceIcon = styled(Link)`
   min-width: 130px;
