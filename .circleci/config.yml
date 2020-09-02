@@ -26,6 +26,7 @@ version: 2.1
 orbs:
   aws-cli: circleci/aws-cli@0.1.13
   aws-code-deploy: circleci/aws-code-deploy@0.0.9
+  cypress: cypress-io/cypress@1.26.0
 
 executors:
   node:
@@ -38,7 +39,6 @@ executors:
         environment:
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
-
 commands:
   upload_to_s3:
     parameters:
@@ -152,7 +152,6 @@ jobs:
       - attach_workspace:
           at: ~/repo
       - run: yarn test
-
   build_staging_frontend:
     executor: node
     steps:
@@ -252,6 +251,12 @@ workflows:
       - test_frontend:
           requires:
             - install_packages
+
+      - cypress/run:
+          yarn: true
+          start: yarn start
+          executor: cypress/browsers-chrome77
+          cache-key: 'yarn-packages-{{ arch }}-{{ checksum "yarn.lock" }}'
 
       - run_linter:
           requires:
