@@ -1,17 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import axios from 'axios'
 import { map, sortBy, orderBy } from 'lodash'
 // import * as JsSearch from 'js-search'
 
-import { origin } from 'constants/constants'
 import Pagination from '@material-ui/lab/Pagination'
 import SearchIcon from '@material-ui/icons/Search'
 import FilterListIcon from '@material-ui/icons/FilterList'
 import useFetchedInitiatives from 'hooks/useFetchedInitiatives'
+import useFetchedTags from 'hooks/useFetchedTags'
+import useFetchedLocations from 'hooks/useFetchedLocations'
 
-import { getJsonLink } from 'utils/helpers/JsonHelper'
 import { useLunrSearch } from 'hooks/useLunrSearch'
 
 import Loader from 'components/Loader/Loader'
@@ -258,16 +257,9 @@ export default function Initiatives ({
   const history = useHistory()
   const searchPhrase = getSearchPhrase(history) //getting initial search params from url
 
-  // initiatives
   const [initiatives, isLoading] = useFetchedInitiatives(category)
-
-  // tags
-  const [tagList, setTagList] = useState([])
-
-  // locations
-  const [locationList, setLocationList] = useState([])
-
-  // OTHER
+  const tagList = useFetchedTags()
+  const locationList = useFetchedLocations()
   const pageSize = 10
   const [currentPage, setCurrentPage] = useState(page || 1)
   const [isTagsListOpen, setIsTagsListOpen] = useState(false)
@@ -282,84 +274,6 @@ export default function Initiatives ({
   const searchText = getSearchPhrase(history)
   const clearActiveTags = () => setActiveSearchTags([])
 
-  useEffect(() => {
-    const fetchTags = async () => {
-      if (process.env.NODE_ENV === 'development') {
-        setTagList(
-          {
-            data:
-              [
-                {
-                  id: '1',
-                  type: 'tags',
-                  attributes: {
-                    name: 'hospitals'
-                  }
-                },
-                {
-                  id: '2',
-                  type: 'tags',
-                  attributes: {
-                    name: 'elder people'
-                  }
-                }
-              ]
-          }
-        );
-      } else {
-        await axios
-          .get(getJsonLink('tags.json'),
-            { headers: {'Access-Control-Allow-Origin': origin} })
-          .then(res => {
-            setTagList(res.data)
-          })
-          .catch(err => {
-            console.error('Nie udało się pobrać tagów: ', err.message)
-          })
-      }
-    }
-    fetchTags()
-  },[])
-
-  useEffect(() => {
-    const fetchLocations = async () => {
-
-      if (process.env.NODE_ENV === 'development') {
-        const mockedData = {
-          data: [
-            {
-              id: '0',
-              type: 'locations',
-              attributes: {
-                name: "Warsaw",
-                resources_count: 1
-              }
-            },
-            {
-              id: '1',
-              type: 'locations',
-              attributes: {
-                name: "Poznan",
-                resources_count: 1
-              }
-            }
-          ]
-        };
-        setLocationList(mockedData);
-      } else {
-        await axios
-          .get(getJsonLink('locations.json'),
-            { headers: {'Access-Control-Allow-Origin': origin} })
-          .then(res => {
-            setLocationList(res.data)
-          })
-          .catch(err => {
-            console.error('Nie udało się pobrać lokacji: ', err.message)
-          })
-      }
-    }
-    fetchLocations()
-  }, [])
 
   useEffect(() => {
     if (page && page !== currentPage) {
@@ -375,7 +289,8 @@ export default function Initiatives ({
     }
   })
 
-  const locations = map(locationList.data, location => {
+
+  const locations = map(locationList?.data, location => {
     const name = location?.attributes?.name
     return {
       label: name,
@@ -472,7 +387,7 @@ export default function Initiatives ({
     )
   }
 
-  const areTagsFetchedSuccessfully = !!tagList.data
+  const areTagsFetchedSuccessfully = !!tagList?.data
   const shouldExpandTagsButtonBeActive =
     areTagsFetchedSuccessfully &&
     (isTagsListOpen || activeSearchTags.length === tagList.length)
@@ -504,7 +419,7 @@ export default function Initiatives ({
                 <StyledFilterListIcon fontSize='small' />
               </ExpandTagsButton>
             )}
-            {locations && (
+            {locationList && (
               <SelectFieldDownshift
                 selectedItem={selectedItem}
                 handleSelectedItemChange={handleSelectedItemChange}

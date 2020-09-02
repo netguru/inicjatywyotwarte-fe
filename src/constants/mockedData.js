@@ -42,3 +42,43 @@ export const mockedInitiatives = [
     }
   }
 ];
+
+export const mockedTags = {
+  data: [
+    {
+      id: '1',
+      type: 'tags',
+      attributes: {
+        name: 'hospitals'
+      }
+    },
+    {
+      id: '2',
+      type: 'tags',
+      attributes: {
+        name: 'elder people'
+      }
+    }
+  ]
+};
+
+export const mockedLocations = {
+  data: [
+    {
+      id: '0',
+      type: 'locations',
+      attributes: {
+        name: "Warsaw",
+        resources_count: 1
+      }
+    },
+    {
+      id: '1',
+      type: 'locations',
+      attributes: {
+        name: "Poznan",
+        resources_count: 1
+      }
+    }
+  ]
+};
