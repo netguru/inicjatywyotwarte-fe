@@ -231,13 +231,7 @@ const OneResourcePage = ({
     isAlreadyUpvoted(resourceId)
   )
 
-  const initiative = () => {
-    const singleInitiative =
-      resourceId
-        ? find(initiatives, ['id', resourceId])
-        : null
-    return singleInitiative
-  }
+  const initiative = () => resourceId ? find(initiatives, ['id', resourceId]) : null
 
   const vote = async () => {
     const value = alreadyUpvoted ? 0 : 1

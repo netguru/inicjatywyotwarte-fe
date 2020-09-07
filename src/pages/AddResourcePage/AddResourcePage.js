@@ -234,53 +234,73 @@ function AddResourceContent () {
       <Header>Dodaj nowe źródło informacji</Header>
       <form onSubmit={onSubmitHandler}>
 
-        <InputField
-          name='app-name'
-          onChange={() => setNameError()}
-          error={nameError}
-          label='Nazwa aplikacji'
-        />
-        <SelectField
-          name='category'
-          options={categories}
-          label='Obszar działania'
-        />
+        <div data-cy="add-resource-app-name" className="test">
+          <InputField
+            name='app-name'
+            onChange={() => setNameError()}
+            error={nameError}
+            label='Nazwa aplikacji'
+          />
+        </div>
+
+        <div data-cy="add-resource-category">
+          <SelectField
+            name='category'
+            options={categories}
+            label='Obszar działania'
+          />
+        </div>
+
         <InputBox checkboxes>
-          <CheckboxField
-            name='platform-ios'
-            label='iOS'
-          />
-          <CheckboxField
-            name='platform-android'
-            label='Android'
-          />
-          <CheckboxField
-            name='platform-website'
-            label='Strona'
-          />
-          <CheckboxField
-            name='platform-fb'
-            label='Fanpage'
-          />
+          <div data-cy="add-resource-platform-ios">
+            <CheckboxField
+              name='platform-ios'
+              label='iOS'
+            />
+          </div>
+          <div data-cy="add-resource-platform-android">
+            <CheckboxField
+              name='platform-android'
+              label='Android'
+            />
+          </div>
+          <div data-cy="add-resource-platform-website">
+            <CheckboxField
+              name='platform-website'
+              label='Strona'
+            />
+          </div>
+          <div data-cy="add-resource-platform-fb">
+            <CheckboxField
+              name='platform-fb'
+              label='Fanpage'
+            />
+          </div>
         </InputBox>
-        <InputField
-          name='target-url'
-          onChange={() => setTargetUrlError()}
-          error={targetUrlError}
-          label='Link do strony internetowej'
-        />
-        <LocationField
-          name='location'
-          hasError={locationError}
-          getLocation={getLocation}
-          label='Lokalizacja'
-        />
-        <TextareaField
-          name='description'
-          onChange={() => setDescriptionError()}
-          error={descriptionError}
-          label='Krótki opis'
-        />
+        <div data-cy="add-resource-target-url">
+          <InputField
+            name='target-url'
+            onChange={() => setTargetUrlError()}
+            error={targetUrlError}
+            label='Link do strony internetowej'
+          />
+        </div>
+        <div data-cy="add-resource-location">
+          <LocationField
+            name='location'
+            hasError={locationError}
+            getLocation={getLocation}
+            label='Lokalizacja'
+          />
+        </div>
+        <div data-cy="add-resource-description">
+          <TextareaField
+            name='description'
+            onChange={() => setDescriptionError()}
+            error={descriptionError}
+            label='Krótki opis'
+          />
+        </div>
         <SubmitButton>Wyślij</SubmitButton>
       </form>
     </>

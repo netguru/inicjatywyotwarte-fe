@@ -7,9 +7,8 @@ import { useState, useEffect } from 'react'
 
 const isDevelopmentEnv = process.env.NODE_ENV === 'development'
 
-const filterInitiatives = (initiatives, category) => {
-  return category ? filter(initiatives, ['attributes.category', category]) : initiatives
-};
+const filterInitiatives = (initiatives, category) =>
+  category ? filter(initiatives, ['attributes.category', category]) : initiatives
 
 const useFetchedInitiatives = (category) => {
   const [initiatives, setInitiatives] = useState(null);
