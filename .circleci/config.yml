@@ -158,7 +158,17 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run: REACT_APP_ROLLBAR_ACCESS_TOKEN=$ROLLBAR_ACCESS_TOKEN REACT_APP_ORIGIN=$STAGING_ORIGIN REACT_APP_STORAGE_BUCKET_URL=$STAGING_STORAGE_BUCKET_URL REACT_APP_API_URL=$API_URL_STAGING REACT_APP_REGION=$STORAGE_REGION REACT_APP_BUCKET=$STORAGE_BUCKET APP_NAME=$APP_NAME yarn build
+      - run:
+          name: Build staging
+          command: yarn build
+          environment:
+            REACT_APP_ROLLBAR_ACCESS_TOKEN: $ROLLBAR_ACCESS_TOKEN
+            REACT_APP_ORIGIN: $STAGING_ORIGIN
+            REACT_APP_STORAGE_BUCKET_URL: $STAGING_STORAGE_BUCKET_URL
+            REACT_APP_API_URL: $API_URL_STAGING
+            REACT_APP_REGION: $STORAGE_REGION
+            REACT_APP_BUCKET: $STORAGE_BUCKET
+            APP_NAME: $APP_NAME
       - persist_to_workspace:
           root: ~/repo
           paths:
@@ -169,7 +179,15 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/repo
-      - run: REACT_APP_ORIGIN=$PROD_ORIGIN REACT_APP_STORAGE_BUCKET_URL=$PROD_STORAGE_BUCKET_URL REACT_APP_API_URL=$API_URL_PRODUCTION REACT_APP_REGION=$PROD_STORAGE_REGION REACT_APP_BUCKET=$PROD_STORAGE_BUCKET yarn build
+      - run:
+          name: Build production
+          command: yarn build
+          environment:
+            REACT_APP_ORIGIN: $PROD_ORIGIN
+            REACT_APP_STORAGE_BUCKET_URL: $PROD_STORAGE_BUCKET_URL
+            REACT_APP_API_URL: $API_URL_PRODUCTION
+            REACT_APP_REGION: $PROD_STORAGE_REGION
+            REACT_APP_BUCKET: $PROD_STORAGE_BUCKET
       - persist_to_workspace:
           root: ~/repo
           paths:
