@@ -157,7 +157,7 @@ export default function LocationField({
                   ${suggestions.length > 1 ? 'location-autocomplete--is-open' : ''}
                   ${hasError ? 'location-autocomplete-input-error' : ''}
                 `
-              })}
+              })} data-cy="add-resource-location-input"
             />
             <div className={suggestions.length > 1 ? 'location-autocomplete-dropdown' : ''}>
               {loading && <LocationLoader>Ładowanie ...</LocationLoader>}

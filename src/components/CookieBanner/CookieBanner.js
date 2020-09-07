@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import SummaryButton from 'components/Buttons/SummaryButton/SummaryButton'
 
-const Banner = styled.div`
+const Banner = styled.div.attrs(() => ({ "data-cy": "cookies-banner" }))`
   position: fixed;
   bottom: 10px;
   left: 0;
@@ -60,9 +60,11 @@ const CookieBanner = () => {
           }
           .
         </span>
-        <StyledSummaryButton onClick={acceptCookie}>
-          Akceptuję
-        </StyledSummaryButton>
+        <div>
+          <StyledSummaryButton onClick={acceptCookie}>
+            Akceptuję
+          </StyledSummaryButton>
+        </div>
       </>
     </Banner>
   )

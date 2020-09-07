@@ -26,7 +26,7 @@ const ToolbarContent = styled.div`
   }
 `
 
-const StyledNavLink = styled(NavLink)`
+const StyledNavLink = styled(NavLink).attrs(() => ({ "data-cy": "nav-link-item" }))`
   text-decoration: none;
   font-weight: 300;
   box-sizing: border-box;

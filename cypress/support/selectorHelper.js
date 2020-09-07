@@ -1,0 +1,1 @@
+export const getByCyData = (label) => { return `[data-cy="${label}"]` }

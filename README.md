@@ -5,7 +5,7 @@
 
 The application is an aggregator of initiatives useful during COVID-19 times and not only. Guests can propose new initiatives from the website, which will then be reviewed by moderators. A user can also upvote initiatives with 'Pomocne' if it was helpful.
 
-- This aplication is the frontend for a backend [Ruby application](https://github.com/netguru/quarantine-helper-be)
+- This aplication is the frontend for a backend [Ruby application](https://github.com/netguru/inicjatywyotwarte-be)
 
 
 ## Tech 

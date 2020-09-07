@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { ReactComponent as NoResultsIllustration } from 'assets/no-results.svg'
 
-const NoResultsContainer = styled.div`
+const NoResultsContainer = styled.div.attrs(props => ({ 'data-cy': 'no-initiatives-found' }))`
   text-align: center;
   margin: 2em;
 `

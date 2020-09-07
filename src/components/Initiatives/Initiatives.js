@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
-import axios from 'axios'
-import { map, sortBy, filter, orderBy } from 'lodash'
+import { map, sortBy, orderBy } from 'lodash'
 // import * as JsSearch from 'js-search'
 
-import { origin } from 'constants/constants'
 import Pagination from '@material-ui/lab/Pagination'
 import SearchIcon from '@material-ui/icons/Search'
 import FilterListIcon from '@material-ui/icons/FilterList'
+import useFetchedInitiatives from 'hooks/useFetchedInitiatives'
+import useFetchedTags from 'hooks/useFetchedTags'
+import useFetchedLocations from 'hooks/useFetchedLocations'
 
-import { getJsonLink } from 'utils/helpers/JsonHelper'
 import { useLunrSearch } from 'hooks/useLunrSearch'
 
 import Loader from 'components/Loader/Loader'
@@ -29,7 +29,6 @@ const SvgSearchIcon = styled(SearchIcon)`
 `
 
 const PaginationWrapper = styled(Pagination)`
-
   ${props => props.theme.contrastSvgIcon
     ? `
       li > div {
@@ -83,7 +82,7 @@ const Header = styled.div`
   }
 `
 
-const ResultsDescription = styled.div`
+const ResultsDescription = styled.div.attrs(() => ({ 'data-cy': 'result-description' }))`
   height: 40px;
   display: flex;
   align-items: center;
@@ -116,7 +115,8 @@ const SearchBox = styled.div`
 `
 
 const ExpandTagsButton = styled.button.attrs({
-  'aria-label': 'rozwiń listę tagów'
+  'aria-label': 'rozwiń listę tagów',
+  'cy-data': 'expand-tags-button',
 })`
   height: 40px;
   width: 90px;
@@ -164,7 +164,7 @@ const SearchInput = styled.input.attrs({
   }
 `
 
-const SearchClearButton = styled.button`
+const SearchClearButton = styled.button.attrs(props => ({ 'data-cy': 'clear-search-input' }))`
   position: absolute;
   right: 10px;
   top: 50%;
@@ -256,11 +256,11 @@ export default function Initiatives ({
 }) {
   const history = useHistory()
   const searchPhrase = getSearchPhrase(history) //getting initial search params from url
-  const [initiatives, setInitiatives] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
-  const [pageSize, setPageSize] = useState(0)
-  const [tagList, setTagList] = useState([])
-  const [locationList, setLocationList] = useState([])
+
+  const [initiatives, isLoading] = useFetchedInitiatives(category)
+  const tagList = useFetchedTags()
+  const locationList = useFetchedLocations()
+  const pageSize = 10
   const [currentPage, setCurrentPage] = useState(page || 1)
   const [isTagsListOpen, setIsTagsListOpen] = useState(false)
   const [activeSearchTags, setActiveSearchTags] = useState([])
@@ -274,60 +274,6 @@ export default function Initiatives ({
   const searchText = getSearchPhrase(history)
   const clearActiveTags = () => setActiveSearchTags([])
 
-  useEffect(() => {
-    const fetchInitiatives = async () => {
-      await axios
-        .get(getJsonLink('resources.json'),
-          { headers: {'Access-Control-Allow-Origin': origin} })
-        .then(res => {
-          const { data } = res.data
-          const initiatives =
-            category
-              ? filter(data, ['attributes.category', category])
-              : data
-
-          setInitiatives(initiatives)
-        })
-        .catch(err => {
-          console.error('Nie udało się pobrać inicjatyw: ', err.message)
-        })
-        .finally(() => {
-          setPageSize(10)
-          setIsLoading(false)
-        })
-    }
-    fetchInitiatives()
-  }, [category])
-
-  useEffect(() => {
-    const fetchTags = async () => {
-      await axios
-        .get(getJsonLink('tags.json'),
-          { headers: {'Access-Control-Allow-Origin': origin} })
-        .then(res => {
-          setTagList(res.data)
-        })
-        .catch(err => {
-          console.error('Nie udało się pobrać tagów: ', err.message)
-        })
-    }
-    fetchTags()
-  },[])
-
-  useEffect(() => {
-    const fetchLocations = async () => {
-      await axios
-        .get(getJsonLink('locations.json'),
-          { headers: {'Access-Control-Allow-Origin': origin} })
-        .then(res => {
-          setLocationList(res.data)
-        })
-        .catch(err => {
-          console.error('Nie udało się pobrać lokacji: ', err.message)
-        })
-    }
-    fetchLocations()
-  }, [])
 
   useEffect(() => {
     if (page && page !== currentPage) {
@@ -343,7 +289,8 @@ export default function Initiatives ({
     }
   })
 
-  const locations = map(locationList.data, location => {
+
+  const locations = map(locationList?.data, location => {
     const name = location?.attributes?.name
     return {
       label: name,
@@ -440,7 +387,7 @@ export default function Initiatives ({
     )
   }
 
-  const areTagsFetchedSuccessfully = !!tagList.data
+  const areTagsFetchedSuccessfully = !!tagList?.data
   const shouldExpandTagsButtonBeActive =
     areTagsFetchedSuccessfully &&
     (isTagsListOpen || activeSearchTags.length === tagList.length)
@@ -472,7 +419,7 @@ export default function Initiatives ({
                 <StyledFilterListIcon fontSize='small' />
               </ExpandTagsButton>
             )}
-            {locations && (
+            {locationList && (
               <SelectFieldDownshift
                 selectedItem={selectedItem}
                 handleSelectedItemChange={handleSelectedItemChange}

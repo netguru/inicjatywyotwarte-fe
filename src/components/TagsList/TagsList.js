@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import Tag from 'components/Tag/Tag'
 
-const TagsContainer = styled.div`
+const TagsContainer = styled.div.attrs(props => ({ 'data-cy': 'tags-container' }))`
   display: flex;
   align-items: center;
   height: 100%;

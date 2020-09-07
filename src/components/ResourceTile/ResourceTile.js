@@ -12,7 +12,7 @@ import { endpoint } from 'constants/constants'
 import { Link } from 'react-router-dom'
 import { saveOrUpdateLocalVote, isAlreadyUpvoted } from 'utils/VoteManager'
 
-const ResourceTileContainer = styled.div`
+const ResourceTileContainer = styled.div.attrs(props => ({ 'data-cy': 'resource-tile' }))`
   background: ${props => props.theme.lightBackgroundColor};
   border-radius: ${props => props.theme.borderRadiusSmall};
   border: 1px solid ${props => props.theme.resourceTileLayoutColor};

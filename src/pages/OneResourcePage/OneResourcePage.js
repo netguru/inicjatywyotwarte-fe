@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
-import { endpoint, origin } from 'constants/constants'
+import { endpoint } from 'constants/constants'
 import styled from 'styled-components'
 import { find } from 'lodash'
 import categories from 'constants/categories'
 import { getShrinkedMainHref } from 'shared'
 import { saveOrUpdateLocalVote, isAlreadyUpvoted } from 'utils/VoteManager'
 import { useTheme } from '@material-ui/core/styles';
-import { getJsonLink } from 'utils/helpers/JsonHelper'
+import useFetchedInitiatives from 'hooks/useFetchedInitiatives'
 
 import Loader from 'components/Loader/Loader'
 import Error from 'components/Error/Error'
@@ -59,7 +59,8 @@ const StyledArrowBack = styled(ArrowBackIcon)`
 `
 
 const GoBackButton = styled.button.attrs({
-  'aria-label': 'wróć'
+  'aria-label': 'wróć',
+  'data-cy': 'one-resource-page-go-back-button'
 })`
   color: ${props => props.theme.fontColorDark};
   background: transparent;
@@ -79,7 +80,7 @@ const GoBackButton = styled.button.attrs({
   }
 `
 
-const Header = styled.header`
+const Header = styled.header.attrs(props => ({ 'data-cy': 'one-resource-page-header' }))`
   display: flex;
   margin-bottom: 4rem;
 
@@ -224,35 +225,13 @@ const OneResourcePage = ({
 }) => {
   const theme = useTheme()
   const resourceId = match.params.id
-  const [initiative, setInitiative] = useState(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [initiatives, isLoading] = useFetchedInitiatives()
   const [votesCount, setVotesCount] = useState(null)
   const [alreadyUpvoted, setAlreadyUpvoted] = useState(
     isAlreadyUpvoted(resourceId)
   )
 
-  useEffect(() => {
-    const fetchInitiatives = async () => {
-      await axios
-        .get(getJsonLink('resources.json'),
-          { headers: {'Access-Control-Allow-Origin': origin} })
-        .then(res => {
-          const { data } = res.data
-          const singleInitiative =
-            resourceId
-              ? find(data, ['id', resourceId])
-              : null
-          setInitiative(singleInitiative)
-        })
-        .catch(err => {
-          console.error('Nie udało się pobrać inicjatyw: ', err.message)
-        })
-        .finally(() => {
-          setIsLoading(false)
-        })
-    }
-    fetchInitiatives()
-  }, [resourceId])
+  const initiative = () => resourceId ? find(initiatives, ['id', resourceId]) : null
 
   const vote = async () => {
     const value = alreadyUpvoted ? 0 : 1
@@ -308,7 +287,7 @@ const OneResourcePage = ({
     tag_list: tags,
     how_to_help: howToHelp,
     upvotes_count: upvotesCount
-  } = initiative.attributes
+  } = initiative().attributes
 
   const platformTiles = []
   if (androidUrl) {

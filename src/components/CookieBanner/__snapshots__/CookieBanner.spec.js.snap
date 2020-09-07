@@ -11,10 +11,12 @@ exports[`CookieBanner match snapshot 1`] = `
     </Styled(Link)>
     .
   </span>
-  <Styled(SummaryButton)
-    onClick={[Function]}
-  >
-    Akceptuję
-  </Styled(SummaryButton)>
+  <div>
+    <Styled(SummaryButton)
+      onClick={[Function]}
+    >
+      Akceptuję
+    </Styled(SummaryButton)>
+  </div>
 </Banner>
 `;
