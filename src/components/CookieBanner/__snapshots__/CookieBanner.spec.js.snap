@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CookieBanner match snapshot 1`] = `
+<Banner>
+  <span>
+    Netguru SA korzysta z plików cookies w celu analizowania ruchu na stronie. Przez dalsze korzystanie z naszego Serwisu, bez zmian ustawień w zakresie prywatności, wyrażasz dobrowolną zgodę na zapisywanie plików cookies w Twojej przeglądarce. Więcej informacji na temat plików cookies znajdziesz w naszej 
+    <Styled(Link)
+      to="/polityka-prywatnosci"
+    >
+      “Polityce Prywatności"
+    </Styled(Link)>
+    .
+  </span>
+  <Styled(SummaryButton)
+    onClick={[Function]}
+  >
+    Akceptuję
+  </Styled(SummaryButton)>
+</Banner>
+`;

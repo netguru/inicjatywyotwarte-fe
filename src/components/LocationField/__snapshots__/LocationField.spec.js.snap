@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LocationField match snapshot 1`] = `
+<styled.div>
+  <PlacesAutocomplete
+    debounce={200}
+    highlightFirstSuggestion={false}
+    onChange={[Function]}
+    onError={[Function]}
+    onSelect={[Function]}
+    searchOptions={
+      Object {
+        "componentRestrictions": Object {
+          "country": "pl",
+        },
+        "types": Array [
+          "(cities)",
+        ],
+      }
+    }
+    shouldFetchSuggestions={true}
+    value=""
+  >
+    <Component />
+  </PlacesAutocomplete>
+</styled.div>
+`;

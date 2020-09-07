@@ -9,6 +9,7 @@ const InputBox = styled.div`
   margin-bottom: 1.5rem;
   width: 100%;
 `
+InputBox.displayName = "InputBox";
 
 const Input = styled.input`
   height: 3rem;
@@ -30,6 +31,7 @@ const Input = styled.input`
     border: ${props => props.theme.inputActiveBorder};
   };
 `
+Input.displayName = "Input";
 
 export default function InputField ({
   name,
@@ -40,12 +42,12 @@ export default function InputField ({
   return (
     <InputBox>
       <Label htmlFor={name}>{label}</Label>
-        <Input
-          id={name}
-          invalid={Boolean(error)}
-          onInput={() => onChange()}
-        />
-        {error && <Error>{error}</Error>}
+      <Input
+        id={name}
+        invalid={Boolean(error)}
+        onInput={() => onChange()}
+      />
+      {error && <Error className="error">{error}</Error>}
     </InputBox>
   )
 }

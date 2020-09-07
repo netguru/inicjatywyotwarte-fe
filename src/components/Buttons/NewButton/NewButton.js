@@ -22,6 +22,7 @@ const AddButton = styled(Link).attrs(() => ({ 'data-cy': 'add-initative-button' 
     color: ${props => props.theme.lightBackgroundColor};
   }
 `
+AddButton.displayName = 'AddButton';
 
 export default function NewButton () {
   return <AddButton to='/dodaj-inicjatywe'>+ Dodaj inicjatywę</AddButton>

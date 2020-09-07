@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputField match snapshot 1`] = `
+<InputBox>
+  <styled.label />
+  <Input
+    invalid={false}
+    onInput={[Function]}
+  />
+</InputBox>
+`;

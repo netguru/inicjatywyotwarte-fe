@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`HelpTile match snapshot 1`] = `
+<styled.div>
+  <Tile
+    aria-controls="header textsectionId"
+    aria-disabled="false"
+    aria-expanded="false"
+    id="header text"
+    onClick={[Function]}
+  >
+    <HeaderText>
+      header text
+    </HeaderText>
+    <HeaderArrow>
+      <ArrowDropDownIcon />
+    </HeaderArrow>
+  </Tile>
+  <WithStyles(ForwardRef(Collapse))
+    in={false}
+    timeout={300}
+  >
+    <Description
+      aria-labelledby="header text"
+      id="header textsectionId"
+      role="region"
+    >
+      description text
+    </Description>
+  </WithStyles(ForwardRef(Collapse))>
+</styled.div>
+`;

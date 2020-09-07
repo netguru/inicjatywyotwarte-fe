@@ -8,6 +8,7 @@ const NoResultsContainer = styled.div.attrs(props => ({ 'data-cy': 'no-initiativ
   text-align: center;
   margin: 2em;
 `
+NoResultsContainer.displayName = 'NoResultsContainer';
 
 const HomeButton = styled(Link)`
   margin: 1.5rem auto 0;
@@ -38,6 +39,8 @@ const Paragraph = styled.p`
   font-size: 1.8rem;
   margin: 1.5rem 0;
 `
+Paragraph.displayName = 'NoResultsParagraph';
+
 
 const StyledNoResultsIllustration = styled(NoResultsIllustration)`
   padding: 2rem 0;

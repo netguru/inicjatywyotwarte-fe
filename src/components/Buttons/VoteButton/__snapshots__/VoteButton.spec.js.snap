@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VoteButton match snapshot 1`] = `
+<Fragment>
+  <UpvoteButton
+    alreadyUpvoted={false}
+    aria-label="głosuj"
+    onClick={[MockFunction]}
+  >
+    <ArrowDropUpIcon />
+    Pomocne
+     
+    <styled.span>
+      (
+      40
+      )
+    </styled.span>
+  </UpvoteButton>
+</Fragment>
+`;

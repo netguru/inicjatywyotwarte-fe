@@ -18,11 +18,13 @@ const Tile = styled.div`
   cursor: pointer;
   padding: 1.3rem 2.5rem;
 `
+Tile.displayName = 'Tile';
 
 const HeaderText = styled.div`
   font-weight: 400;
   font-size: 1rem;
 `
+HeaderText.displayName = 'HeaderText';
 
 const HeaderArrow = styled.div`
   display: flex;
@@ -34,6 +36,7 @@ const HeaderArrow = styled.div`
     border-radius: 50px;
   }
 `
+HeaderArrow.displayName = 'HeaderArrow';
 
 const Description = styled.div`
   padding: 1rem 2.5rem 1.3rem;
@@ -43,6 +46,7 @@ const Description = styled.div`
   color: ${props => props.theme.modalColorLight};
   text-align: justify;
 `
+Description.displayName = 'Description';
 
 const HelpTile = ({ headerText, descriptionText }) => {
   const [isOpen, setIsOpen] = useState(false)

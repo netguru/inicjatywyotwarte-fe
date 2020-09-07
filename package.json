@@ -15,9 +15,12 @@
     "axios": "^0.19.2",
     "commitizen": "^4.0.3",
     "customize-cra": "^1.0.0",
-    "cypress": "^5.0.0",
+    "cypress": "^5.1.0",
     "cz-conventional-changelog": "^3.1.0",
     "downshift": "^5.4.3",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.3",
+    "enzyme-to-json": "^3.5.0",
     "eslint-config-prettier": "^5.1.0",
     "eslint-plugin-cypress": "^2.11.1",
     "eslint-plugin-prettier": "^3.1.2",
@@ -46,6 +49,7 @@
     "styled-components": "^5.1.0"
   },
   "devDependencies": {
+    "jest-localstorage-mock": "^2.4.3",
     "standard": "^14.3.3",
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "^18.2.0",
@@ -68,6 +72,14 @@
     "globals": {
       "cy": true
     }
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "setupFiles": [
+      "jest-localstorage-mock"
+    ]
   },
   "browserslist": {
     "production": [

@@ -21,6 +21,7 @@ const Container = styled.div`
 
   ${props => !props.shouldShowPopUp && 'display: none;'}
 `
+Container.displayName = 'PopUpContainer';
 
 const StyledSummaryButton = styled(SummaryButton)`
   margin-bottom: 0;

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NoInitiatives match snapshot 1`] = `
+<div
+  className="no-initiatives"
+>
+  <p>
+    Żadna inicjatywa nie została jeszcze dodana.
+    <br />
+    Kliknij poniżej, aby dodać swoją
+  </p>
+  <NewButton />
+</div>
+`;

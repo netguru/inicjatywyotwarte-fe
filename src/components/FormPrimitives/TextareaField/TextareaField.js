@@ -9,6 +9,7 @@ const InputBox = styled.div`
   margin-bottom: 1.5rem;
   width: 100%;
 `
+InputBox.displayName = "InputBox";
 
 const Textarea = styled.textarea`
   min-height: 8rem;
@@ -31,6 +32,7 @@ const Textarea = styled.textarea`
     border: ${props => props.theme.inputActiveBorder};
   }
 `
+Textarea.displayName = "Textarea";
 
 export default function TextareaField ({
   name,
@@ -46,7 +48,7 @@ export default function TextareaField ({
         invalid={Boolean(error)}
         onInput={() => onChange()}
       />
-      {error && <Error>{error}</Error>}
+      {error && <Error className="error">{error}</Error>}
     </InputBox>
   )
 }
